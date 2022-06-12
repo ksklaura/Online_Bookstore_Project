@@ -7,8 +7,12 @@
 <title>user_mypage_main</title>
 </head>
 <body>
-	hello world!
-	<br/>
-	++깃허브에 추가 잘 되는지 확인
+	<div id='mypageMain'>
+		<div id='mypageMain_nav'>
+			<li>회원정보 수정</li>
+			<li>구매내역 조회</li>
+			<li>장바구니 보기</li>
+		</div>
+	</div>
 </body>
 </html>
