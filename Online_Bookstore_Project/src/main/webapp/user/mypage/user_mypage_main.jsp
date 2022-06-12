@@ -14,7 +14,7 @@
 			<li>장바구니 보기</li>
 		</div>
 		
-		making some changes at 11:50 pm.
+		making some changes at 11:53 pm.
 	</div>
 </body>
 </html>
