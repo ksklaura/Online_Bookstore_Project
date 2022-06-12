@@ -7,6 +7,8 @@
 <title>user_mypage_main</title>
 </head>
 <body>
-hello world!
+	hello world!
+	<br/>
+	++깃허브에 추가 잘 되는지 확인
 </body>
 </html>
