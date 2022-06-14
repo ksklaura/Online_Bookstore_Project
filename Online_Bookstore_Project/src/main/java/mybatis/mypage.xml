@@ -1,1 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage">
+
+	<select id='tot_size' parameterType='bean.Page' resultType='Integer'> <!-- 검색어에 해당하는 자료의 건수 -->
+		select count(orderNo) from orders
+		where orderNo like  '%${findStr}%' 
+		or bookCode like  '%${findStr}%' 
+		or bookTitle like      '%${findStr}%' 
+		or price like '%${findStr}%'
+		or ea like '%${findStr}%'
+		or amt like '%${findStr}%' 
+		or bookImage like '%${findStr}%' 
+		or orderDate like '%${findStr}%' 
+		or paymentType like '%${findStr}%' 
+		or zipCode like '%${findStr}%' 
+		or address like '%${findStr}%' 
+		or phone like '%${findStr}%' 
+	</select>
+
+	<select id='select' parameterType="bean.Page" resultType="mypage.userMypageVo">
+		select * from orders
+		where orderNo like  '%${findStr}%' 
+		or bookCode like  '%${findStr}%' 
+		or bookTitle like      '%${findStr}%' 
+		or price like '%${findStr}%'
+		or ea like '%${findStr}%'
+		or amt like '%${findStr}%' 
+		or bookImage like '%${findStr}%' 
+		or orderDate like '%${findStr}%' 
+		or paymentType like '%${findStr}%' 
+		or zipCode like '%${findStr}%' 
+		or address like '%${findStr}%' 
+		or phone like '%${findStr}%' 
+		order by o.orderNo
+		limit ${startNo}, ${listSize}
+	</select>
+
+</mapper>

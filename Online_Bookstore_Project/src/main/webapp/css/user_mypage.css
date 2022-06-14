@@ -9,6 +9,11 @@
 	width: 1200px;
 }
 
+#order_list h2{
+	font-family: 나눔바른고딕 Light;
+	text-align: center;
+}
+
 #order_list .frm_order_list{
 	--padding-top: 7px;
 	text-align: right;
