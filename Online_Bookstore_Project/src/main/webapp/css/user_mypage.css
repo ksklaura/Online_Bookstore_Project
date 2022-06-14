@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+/* MYPAGE - ORDER LIST */
+
+#order_list{
+	font-family: 나눔바른고딕 Light;
+	font-size: 14px;
+	margin: auto;
+	width: 1200px;
+}
+
+#order_list .frm_order_list{
+	--padding-top: 7px;
+	text-align: right;
+}
+
+#order_list>#frm_order_list>#findStr{
+	border: 1px solid #ffb2f5;
+	font-family: 나눔바른고딕 Light;
+	height: 20px;
+}
+#order_list>#frm_order_list .button{
+	background-color: #ffebff;
+	border: 1px solid #ffb2f5;
+	border-radius: 5px;
+	width: 80px;
+	height: 20px;
+	font-family: 나눔바른고딕 Light;
+}
+#order_list>#frm_order_list .button:hover{
+	cursor: pointer;
+	background-color: #ffb2f5;
+	border: 1px solid #ffb2f5;
+	border-radius: 5px;
+	color: #fff;
+	font-family: 나눔바른고딕 Light;
+	transition : all .2s;
+}
+
+#order_list .titles{
+	background-color: #ffb2f5;
+	color: #fff;
+	padding: 2px 5px;
+}
+
+#order_list span{
+	display: inline-block;
+	text-align: center;
+}
+
+#order_list .item{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#order_list .no{
+	width: 70px;
+	text-align: center;
+}
+
+#order_list .orderNo{width:80px;}
+#order_list .uId{width:80px;}
+#order_list .receiver{width:80px; }
+#order_list .bookCode{width:80px; }
+#order_list .bookTitle{width:80px; }
+#order_list .price{width:80px;}
+#order_list .ea{width:80px; }
+#order_list .amt{width:80px; }
+#order_list .bookImage{width:80px; }
+#order_list .orderDate{width:80px; }
+#order_list .paymentType{width:80px; }
+#order_list .zipCode{width:80px; }
+#order_list .address{width:80px; }
+#order_list .phone{width:80px; }
+
+#order_list .item:hover{
+	cursor: pointer;
+	background-color: #ffebff;
+	cursor: pointer;
+	transition : all .2s;
+}
+
+#order_list .item:nth-child(5n){
+	border-bottom: 1px solid #f00;
+}
+
+#order_list .item:last-child{
+	border-bottom: 2px solid #ccc;
+	margin-bottom: 8px;
+}
+
+#order_list .paging{
+	padding-top: 10px;
+	text-align: center;
+	font-family: 나눔바른고딕 Light;
+}
+
+#order_list .paging>button{
+	padding: 2px 5px;
+	font-size: 10pt;
+	background-color: #fff;
+	border: none;
+	font-family: 나눔바른고딕 Light;
+	transition : all .2s;
+}
+#order_list .paging>button:hover{
+	cursor: pointer;
+	color: #fff;
+	background-color: #ffb2f5;
+	border-radius: 100px;
+	cursor: pointer;
+	font-family: 나눔바른고딕 Light;
+	transition : all .2s;
+}

@@ -13,8 +13,6 @@
 			<li>구매내역 조회</li>
 			<li>장바구니 보기</li>
 		</div>
-		
-		making some changes at 11:53 pm.
 	</div>
 </body>
 </html>

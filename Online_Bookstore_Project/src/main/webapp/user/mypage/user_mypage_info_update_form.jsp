@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>user_mypage_info_update_form</title>
+
+<!-- 다음 API 연결 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </head>
 <body>
 	<div id='mypage_info_update'>
@@ -18,8 +22,10 @@
 			<input type='password' name='pwd'/><br/>
 			<label>비밀번호 확인</label>
 			<input type='password' name='pwd'/><br/> <!-- 두 비밀번호가 일치하지 않으면 alert -->
+													 <!-- 비밀번호 암호화 -->
 			<label>이름</label>
-			<input type='text' name='uName' readonly/><br/> <!-- "이름 변경이 필요하신 경우, 고객센터로 문의하여 주세요." -->
+			<input type='text' name='uName' readonly/><br/>
+			<label>이름 변경이 필요하신 경우, 고객센터로 문의하여 주세요.</label><br/>
 			<label>생년월일</label>
 			<input type='text' name='birthDate'/><br/>
 			<label>휴대폰번호</label>
@@ -27,11 +33,12 @@
 			<label>이메일주소</label>
 			<input type='text' name='email'/><br/>
 			<label>우편번호</label>
-			<input type='text' name='zipCode'/><br/>
+			<input type='text' name='zipCode'/>
+			<button type='button' id='btnZipFind'>우편번호 검색</button><br/>
 			<label>주소</label>
 			<input type='text' name='address'/><br/>
 			<label>상세주소</label>
-			<input type='text' name='addressDetail'/><br/>
+			<input type='text' name='addressDetail'/><br/> <!-- DB엔 address와 addressDetail 합쳐서 들어가도록 -->
 			<label>성별</label>
 			<label><input type='radio' name='gender' value='M'/>남자</label>
 			<label><input type='radio' name='gender' value='F'/>여자</label><br/>
@@ -44,5 +51,6 @@
 		</form>
 		<!-- 회원탈퇴 버튼도 아주아주 작게 만들지? -->
 	</div>
+	<script src='../../js/userMypage.js'></script>
 </body>
 </html>
