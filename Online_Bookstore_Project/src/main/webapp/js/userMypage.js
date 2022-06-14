@@ -18,7 +18,7 @@
 mypage = function(){ // 초기화면 동작할 수 있게끔
 	
 	let frm=$(".frm_order_list");
-	frm.action='/mypage.do';
+	frm.action='../../mypage.do';
 	frm.submit();
 	console.log("frm : ", frm);
 }
