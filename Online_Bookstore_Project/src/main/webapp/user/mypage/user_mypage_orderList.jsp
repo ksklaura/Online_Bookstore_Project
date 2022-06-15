@@ -1,7 +1,7 @@
 <%@page import="bean.Page"%>
-<%@page import="mypage.userMypageVo"%>
+<%@page import="mypage.UserMypageVo"%>
 <%@page import="java.util.List"%>
-<%@page import="mypage.userMypageDao"%>
+<%@page import="mypage.UserMypageDao"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -18,7 +18,7 @@
 <body>
 	<div id='order_list'>
 		<h2>주문내역 조회</h2>
-		<form name='frm_order_list' id='frm_order_list' class='frm_order_list' onsubmit='return false' method="post">
+		<form name='frm_order_list' id='frm_order_list' class='frm_order_list' method="post" onsubmit='return false'>
 			<input type='text' name='findStr' id='findStr' value='${param.findStr}' onkeypress='if(event.keyCode == 13){mypage.select(this.form);}'/>
 			<button type='button' class='button' onclick='mypage.select(this.form)'>조회</button>
 			<input type='hidden' name='nowPage' value='${param.nowPage}'/>

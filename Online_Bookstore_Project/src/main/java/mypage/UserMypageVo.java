@@ -1,6 +1,7 @@
 package mypage;
 
-public class userMypageVo {
+public class UserMypageVo {
+	// 여기는 ORDERS
 	String orderNumber;		 // 주문번호
 	String uId;				 // 구매자 아이디
 	String receiver; 		 // 수령인 이름
@@ -17,8 +18,42 @@ public class userMypageVo {
 	String phone; 			 // 전화번호
 	// String shippingStatus;// 배송상황 				// DB에 추가?
 	
-	public userMypageVo() {}
-
+	// 여기는 USER (uId, zipCode, address, phone 제외하고)
+	String pwd;
+	String uName;
+	String birth;
+	String email;
+	String gender;
+	String job;
+	
+	public UserMypageVo() {}
+	public UserMypageVo(String orderNumber, String uId, String receiver, int bookCode, String bookTitle, 
+			int price, int ea, int amt, String bookImage, String orderDate, String paymentType, 
+			String pwd, String uName, String birth, String phone, String email, String zipCode, 
+			String address, String gender, String job) {
+		this.orderNumber = orderNumber;
+		this.receiver = receiver; 		 
+		this.bookCode = bookCode; 			 
+		this.bookTitle = bookTitle; 		
+		this.price = price; 				
+		this.ea = ea; 				 
+		this.amt = amt;				 
+		this.bookImage = bookImage; 		 
+		this.orderDate = orderDate; 		 
+		this.paymentType = paymentType; 	
+		
+		this.uId = uId;
+		this.pwd = pwd;
+		this.uName = uName;
+		this.birth = birth;
+		this.phone = phone;
+		this.email = email;
+		this.zipCode = zipCode;
+		this.address = address;
+		this.gender = gender;
+		this.job = job;
+	}
+	
 	/* GETTERS & SETTERS */
 
 	public String getOrderNumber() {
@@ -132,6 +167,43 @@ public class userMypageVo {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	public String getuName() {
+		return uName;
+	}
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+	public String getBirth() {
+		return birth;
+	}
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getJob() {
+		return job;
+	}
+	public void setJob(String job) {
+		this.job = job;
+	}
+	
 
 	/*
 	 * public String getShippingStatus() { return shippingStatus; }

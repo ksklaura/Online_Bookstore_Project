@@ -19,7 +19,7 @@
 	</environments>	
 	
 	<mappers>
-		<mapper resource="mybatis/mypage.xml"/> <!-- mypage.xml 페이지와 연결! -->
+		<mapper resource="mybatis/mypage.xml"/>
 		<mapper resource="mybatis/cart.xml"/>
 	</mappers>
 	

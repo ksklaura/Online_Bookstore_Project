@@ -19,8 +19,8 @@ public class MybaFactory {
 			Reader r = Resources.getResourceAsReader("mybatis/config.xml");
 			factory = new SqlSessionFactoryBuilder().build(r);
 			
-			if(factory == null ) System.out.println("fail......");
-				System.out.println("good!!");
+			if(factory == null ) System.out.println("fail");
+			/* System.out.println("good!!"); */
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

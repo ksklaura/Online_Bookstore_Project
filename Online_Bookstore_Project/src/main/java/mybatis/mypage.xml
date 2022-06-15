@@ -19,22 +19,39 @@
 		or phone like '%${findStr}%' 
 	</select>
 
-	<select id='select' parameterType="bean.Page" resultType="mypage.userMypageVo">
+	<select id='select' parameterType="bean.Page" resultType="mypage.UserMypageVo">
 		select * from orders
 		where orderNo like  '%${findStr}%' 
-		or bookCode like  '%${findStr}%' 
-		or bookTitle like      '%${findStr}%' 
-		or price like '%${findStr}%'
-		or ea like '%${findStr}%'
-		or amt like '%${findStr}%' 
-		or bookImage like '%${findStr}%' 
-		or orderDate like '%${findStr}%' 
+		or bookCode like  	'%${findStr}%' 
+		or bookTitle like   '%${findStr}%' 
+		or price like 		'%${findStr}%'
+		or ea like 			'%${findStr}%'
+		or amt like 		'%${findStr}%' 
+		or bookImage like 	'%${findStr}%' 
+		or orderDate like 	'%${findStr}%' 
 		or paymentType like '%${findStr}%' 
-		or zipCode like '%${findStr}%' 
-		or address like '%${findStr}%' 
-		or phone like '%${findStr}%' 
-		order by o.orderNo
+		or zipCode like 	'%${findStr}%' 
+		or address like 	'%${findStr}%' 
+		or phone like 		'%${findStr}%' 
+		order by orderNo
 		limit ${startNo}, ${listSize}
+	</select>
+	
+	<update id='updateInfo' parameterType="mypage.UserMypageVo">
+		update user set uId=#{uId}, pwd=#{pwd}, uName=#{uName}, birth=#{birth}, phone=#{phone}, 
+						email=#{email}, zipCode=#{zipCode}, address=#{address}, gender=#{gender}, 
+						job=#{job}
+		where uId=#{uId}
+	</update>
+	
+	<select id="member_email_validation" parameterType="String" resultType="String">
+		select email from user
+		where email = '${_parameter}'
+	</select>
+
+	<select id="member_phone_validation" parameterType="String" resultType="String">
+		select phone from user
+		where phone = '${_parameter}'
 	</select>
 
 </mapper>
