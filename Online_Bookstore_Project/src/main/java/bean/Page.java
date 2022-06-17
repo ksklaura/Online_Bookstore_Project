@@ -4,7 +4,7 @@ public class Page {
 	int startNo;		// 목록의 시작 위치				// endNo - listSize + 1 (MySQL는 제로베이스이기 때문에 +1은 불필요함.)
 	int endNo;			// 목록의 끝 위치 				// listSize * nowPage
 													// if(endNo > totSize) endNo = totSize;
-	int listSize = 30;	// 목록의 행수
+	int listSize = 10;	// 목록의 행수
 	int totSize;		// 검색된 전체 건수
 	int blockSize = 5;	// 표시될 페이지의 수
 	int totPage;		// 전체 페이지 수 				// (int)Math.ceil(totSize / (double)listSize) 
@@ -17,6 +17,7 @@ public class Page {
 													// if(endPage > totPage) endPage = totPage;
 	int nowPage;		// 사용자가 보고있는 현재 페이지
 	String findStr; 	// 검색창
+	String uId;
 	
 	public Page() {
 		compute();
@@ -110,4 +111,11 @@ public class Page {
 	public void setFindStr(String findStr) {
 		this.findStr = findStr;
 	}
+	public String getuId() {
+		return uId;
+	}
+	public void setuId(String uId) {
+		this.uId = uId;
+	}
+	
 }

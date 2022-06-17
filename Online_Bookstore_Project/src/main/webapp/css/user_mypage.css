@@ -41,6 +41,9 @@
 	font-family: 나눔바른고딕 Light;
 	transition : all .2s;
 }
+#order_list>#lists{
+	width: 1200px;
+}
 
 #order_list .titles{
 	background-color: #ffb2f5;
@@ -56,27 +59,33 @@
 #order_list .item{
 	padding-top: 5px;
 	padding-bottom: 5px;
+	display: table;
+	width: 1200px;
 }
 
-#order_list .no{
+#order_list .item span{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#order_list .item .no{
 	width: 70px;
-	text-align: center;
+	--text-align: center;
 }
 
 #order_list .orderNo{width:80px;}
-#order_list .uId{width:80px;}
-#order_list .receiver{width:80px; }
-#order_list .bookCode{width:80px; }
-#order_list .bookTitle{width:80px; }
-#order_list .price{width:80px;}
-#order_list .ea{width:80px; }
-#order_list .amt{width:80px; }
-#order_list .bookImage{width:80px; }
+#order_list .code{width:80px;}
+#order_list .codeName{width:90px; }
+#order_list .price{width:80px; }
+#order_list .orderEa{width:80px; }
+#order_list .amt{width:80px;}
+#order_list .img{width:80px; }
 #order_list .orderDate{width:80px; }
-#order_list .paymentType{width:80px; }
-#order_list .zipCode{width:80px; }
-#order_list .address{width:80px; }
-#order_list .phone{width:80px; }
+#order_list .paymentType{width:60px; }
+#order_list .rName{width:80px; }
+#order_list .rZipcode{width:80px; }
+#order_list .rAddress{width:100px; }
+#order_list .rPhone{width:80px; }
 
 #order_list .item:hover{
 	cursor: pointer;
@@ -118,3 +127,87 @@
 	transition : all .2s;
 }
 
+/* MYPAGE - INFO UPDATE FORM */
+
+#mypage_info_update{
+	width: 550px;
+	margin: 50px auto;
+}
+#mypage_info_update h2{
+	text-align: center;
+	margin: 20px 0px;
+	margin-bottom: 40px;
+}
+
+#mypage_info_update>#frm_info_update{
+	padding: 30px 20px;
+}
+#mypage_info_update>#frm_info_update .label_group{
+	margin-top: 5px;
+	margin-left: 25px;
+}
+#mypage_info_update>#frm_info_update label{
+	display: inline-block;
+	width: 120px;
+	font-size: 1em;
+	font-weight: 500;
+}
+
+#mypage_info_update>#frm_info_update input{
+	width: 320px;
+	height: 30px;
+	margin: 5px 0;
+	border: none;
+	box-shadow: 0 0 2px #333;
+	border-radius: 3px;
+	font-size: 1em;
+	padding: 2px 10px;
+}
+#mypage_info_update>#frm_info_update .readonly{
+	background-color: #fec156;
+	color: #fff;
+}
+#mypage_info_update>#frm_info_update input[type='radio']{
+	width: 50px;
+	height: 20px;
+	box-shadow: none;
+	margin-bottom: 10px;
+}
+#mypage_info_update>#frm_info_update input[name='zipCode']{
+	width: 160px;
+}
+#mypage_info_update>#frm_info_update #btnZipFind{
+	position: relative;
+	margin-left: 5px;
+	width: 150px;
+	height: 32px;
+	cursor: pointer;
+	padding: 2px 10px;
+	font-size: 1em;
+	font-weight: 500;
+	top: 1px;
+}
+#mypage_info_update>#frm_info_update span{
+	position: relative;
+	bottom: 7px;
+	margin-left: 130px;
+	font-size: 0.5em;
+	color: #dd3115;
+}
+#mypage_info_update>#frm_info_update input[type="date"]{
+	text-align: right;
+	padding-right: 20px;
+}
+#mypage_info_update>#frm_info_update>.btns{
+	margin: 20px 0px;
+	text-align: center;
+}
+#mypage_info_update>#frm_info_update>.btns>button{
+	width: 350px;
+	height: 45px;
+	border-radius: 7px;
+	cursor: pointer;
+	padding: 3px 10px;
+	font-size: 1.2em;
+	margin: 10px 0px;
+}

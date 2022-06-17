@@ -33,58 +33,68 @@ public class UserMypageServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		job = req.getParameter("job");
 		Page page = null;
 		List<UserMypageVo> list = null;
 				
+		if(req.getParameter("job") != null) {
+			job = req.getParameter("job");			
+		}
+		
 		switch(job) {
-		case "select":
-			select(req, resp);
+		case "selectOrder":
+			selectOrder(req, resp);
+			break;
+		case "selectOneInfo":
+			selectOneInfo(req, resp);
 			break;
 		case "update":
 			update(req, resp);
-		case "memberEmailValidation" :
-			memberEmailValidation(req, resp);
-			break;
-		case "memberPhoneValidation" :
-			memberPhoneValidation(req, resp);
-			break;
-		default:
-			select(req, resp);
-			break;
 		}
 	}
 	
-	public void select(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 메뉴에서 게시물관리 클릭했을 때, 검색할 내용을 넣고 "조회"를 클릭했을 때,
-		// 페이지를 이동할 때, 입력폼, 수정폼 등에서 취소 버튼을 누를 때
-		// 이 4가지의 경우에 모두 select 실행
-		// GO BACK TO THE ORDERED LIST
-		
-		String findStr = req.getParameter("findStr");
-		int nowPage = 0;
-		Page page = null;
-		List<UserMypageVo> list = null;
-		String url = "";
-		
-		
-		try {
-			nowPage = Integer.parseInt(req.getParameter("nowPage"));
-		}catch(Exception e) {
-			nowPage = 1;
-		}
-		page = new Page();
-		page.setFindStr(findStr);
-		page.setNowPage(nowPage);
-		
-		list = dao.select(page);
-		page = dao.getPage();
-		
-		req.setAttribute("list", list);
-		req.setAttribute("page", page);
-		
-		url = base + "orderList.jsp";
+	public void selectOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 1페이지의 목록을 가져와 반환
+				String url = base + "orderList.jsp";
+				String uId = req.getParameter("uId");
+				Page page = new Page();
+				
+				// 페이지 전환
+				String temp = req.getParameter("nowPage");
+				int nowPage = 1;
+				try {
+					nowPage = Integer.parseInt(temp);
+				}catch(Exception ex) {
+					nowPage = 1;
+				}
+				page.setNowPage(nowPage);
+				page.setuId(uId);
+				
+				// 검색결과 페이지 처리
+				String findStr = req.getParameter("findStr");
+				if(findStr == null) {
+					page.setFindStr("");
+				}else {
+					page.setFindStr(findStr);
+				}
+				
+				List<UserMypageVo> list = dao.selectOrder(page);
+				page = dao.getPage();
+				
+				req.setAttribute("list", list);
+				req.setAttribute("page", page);
+				req.setAttribute("uId", uId);
+				
+				rd = req.getRequestDispatcher(url);
+				rd.forward(req, resp);
+	}
+	
+	public void selectOneInfo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		url = base + "info_update_form.jsp";
+		String uId = req.getParameter("uId");
+		UserMypageVo vo = dao.selectOneInfo(uId);
+		req.setAttribute("vo", vo);
 		rd = req.getRequestDispatcher(url);
+		
 		rd.forward(req, resp);
 	}
 	
@@ -92,7 +102,7 @@ public class UserMypageServlet extends HttpServlet{
 		UserMypageVo vo = new UserMypageVo();
 		String address = req.getParameter("address1") + " " + req.getParameter("address2");
 		
-		vo.setuId(req.getParameter("uId")); // id랑 이름은 변경 안 되지만 넣어야겠지?
+		vo.setuId(req.getParameter("uId"));
 		vo.setPwd(req.getParameter("pwd"));
 		vo.setuName(req.getParameter("uName"));
 		vo.setBirth(req.getParameter("birth"));
@@ -105,37 +115,11 @@ public class UserMypageServlet extends HttpServlet{
 		
 		if(dao.update(vo)) {
 			req.setAttribute("msg", "회원정보가 수정되었습니다.");
+
 		}else {
 			req.setAttribute("msg", "회원정보 수정 중 오류가 발생했습니다. 다시 시도해주시기 바랍니다.");
 		}
-		
 		url = base + "main.jsp";
-		rd = req.getRequestDispatcher(url);
-		rd.forward(req, resp);
-	}
-	
-	// 이메일주소 중복여부 확인
-	public void memberEmailValidation(HttpServletRequest req, HttpServletResponse resp) 
-			throws ServletException, IOException {
-		String email = req.getParameter("email");
-		String emailValidation = dao.userMemberEmailValdation(email);
-		
-		req.setAttribute("emailValidation", emailValidation);
-				
-		url = base + "info_update_validation.jsp";
-		rd = req.getRequestDispatcher(url);
-		rd.forward(req, resp);
-	}
-	
-	// 휴대폰번호 중복여부 확인
-	public void memberPhoneValidation(HttpServletRequest req, HttpServletResponse resp) 
-			throws ServletException, IOException {
-		String phone = req.getParameter("phone");
-		String phoneValidation = dao.userMemberPhoneValdation(phone);
-		
-		req.setAttribute("phoneValidation", phoneValidation);
-				
-		url = base + "info_update_validation.jsp";
 		rd = req.getRequestDispatcher(url);
 		rd.forward(req, resp);
 	}

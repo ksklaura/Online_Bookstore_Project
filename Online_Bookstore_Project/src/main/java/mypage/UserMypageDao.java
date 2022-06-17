@@ -15,7 +15,6 @@ public class UserMypageDao implements UserMypageInterface {
 	SqlSession session;
 	HttpSession s;
 	Page page;
-	
 	AES aes;
 	
 	public UserMypageDao() {
@@ -32,7 +31,7 @@ public class UserMypageDao implements UserMypageInterface {
 	}
 
 	@Override
-	public List<UserMypageVo> select(Page page) {
+	public List<UserMypageVo> selectOrder(Page page) {
 		List<UserMypageVo> list = null;
 		
 		try {
@@ -42,19 +41,23 @@ public class UserMypageDao implements UserMypageInterface {
 			page.setStartNo(page.getStartNo()-1); // 이걸 안 하면 목록의 첫번째 데이터가 누락됨.
 			this.page = page;
 			
-			list = session.selectList("mypage.select", page);
+			list = session.selectList("mypage.selectOrder", page);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
 
-	// 정확하지 않음... ★★★★★
 	@Override
-	public UserMypageVo selectOne(String uId) {
+	public UserMypageVo selectOneInfo(String uId) {
 		UserMypageVo vo = null;
 		try {
-			vo = session.selectOne("mypage.view", uId); // 일단 난 view 페이지가 없음..
+			vo = session.selectOne("mypage.selectOneInfo", uId);
+			
+			// Date 형식으로 출력되는 생년월일에서 "-"를 없애줌.
+			String birth = vo.getBirth();
+			birth = birth.replaceAll("[-]", "");
+			vo.setBirth(birth);
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
@@ -67,7 +70,6 @@ public class UserMypageDao implements UserMypageInterface {
 		boolean b = false;
 		String pwd = aes.enc(vo.getPwd());
 		vo.setPwd(pwd);
-		
 		int cnt = session.update("mypage.updateInfo", vo);
 		if(cnt > 0) {
 			b = true;
@@ -76,16 +78,6 @@ public class UserMypageDao implements UserMypageInterface {
 			session.rollback();
 		}
 		return b;
-	}
-	
-	public String userMemberEmailValdation(String email) {
-		String result = session.selectOne("mypage.member_email_validation", email);
-		return result;
-	}
-	
-	public String userMemberPhoneValdation(String phone) {
-		String result = session.selectOne("mypage.member_phone_validation", phone);	
-		return result;
 	}
 
 	@Override

@@ -3,55 +3,50 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mypage">
 
-	<select id='tot_size' parameterType='bean.Page' resultType='Integer'> <!-- 검색어에 해당하는 자료의 건수 -->
-		select count(orderNo) from orders
-		where orderNo like  '%${findStr}%' 
-		or bookCode like  '%${findStr}%' 
-		or bookTitle like      '%${findStr}%' 
-		or price like '%${findStr}%'
-		or ea like '%${findStr}%'
-		or amt like '%${findStr}%' 
-		or bookImage like '%${findStr}%' 
-		or orderDate like '%${findStr}%' 
-		or paymentType like '%${findStr}%' 
-		or zipCode like '%${findStr}%' 
-		or address like '%${findStr}%' 
-		or phone like '%${findStr}%' 
+	<select id="tot_size" parameterType="bean.Page" resultType="Integer"> <!-- 검색어에 해당하는 자료의 건수 -->
+		select count(sno) from orders o left join item i
+		on o.code = i.code
+		where o.uId='${uId}'
+		or o.orderNo like 		'%${findStr}%' 
+		or o.code like  		'%${findStr}%' 
+		or i.codeName like  	'%${findStr}%' 
+		or o.orderDate like 	'%${findStr}%'
 	</select>
 
-	<select id='select' parameterType="bean.Page" resultType="mypage.UserMypageVo">
-		select * from orders
-		where orderNo like  '%${findStr}%' 
-		or bookCode like  	'%${findStr}%' 
-		or bookTitle like   '%${findStr}%' 
-		or price like 		'%${findStr}%'
-		or ea like 			'%${findStr}%'
-		or amt like 		'%${findStr}%' 
-		or bookImage like 	'%${findStr}%' 
-		or orderDate like 	'%${findStr}%' 
-		or paymentType like '%${findStr}%' 
-		or zipCode like 	'%${findStr}%' 
-		or address like 	'%${findStr}%' 
-		or phone like 		'%${findStr}%' 
+	<select id="selectOrder" parameterType="bean.Page" resultType="mypage.UserMypageVo">
+		select o.orderNo, o.code, i.codeName, i.price, o.orderEa, o.amt, i.img, o.orderDate, 
+			   o.paymentType, o.rName, o.rZipcode, o.rAddress, o.rPhone 
+		from orders o left join item i
+		on o.code = i.code
+		where o.uId='${uId}'
+		or o.orderNo like 		'%${findStr}%' 
+		or o.code like  		'%${findStr}%' 
+		or i.codeName like  	'%${findStr}%' 
+		or o.orderDate like 	'%${findStr}%'
 		order by orderNo
 		limit ${startNo}, ${listSize}
 	</select>
 	
-	<update id='updateInfo' parameterType="mypage.UserMypageVo">
+	<!-- 회원정보 수정 페이지에 기존 정보 뿌리기 -->
+	<select id="selectOneInfo" parameterType="String" resultType="mypage.UserMypageVo">
+		select uId, uName, email, phone, zipCode, address, gender, birth from user 
+		where uId=#{_parameter}
+	</select>
+	
+	<update id="updateInfo" parameterType="mypage.UserMypageVo">
 		update user set uId=#{uId}, pwd=#{pwd}, uName=#{uName}, birth=#{birth}, phone=#{phone}, 
-						email=#{email}, zipCode=#{zipCode}, address=#{address}, gender=#{gender}, 
-						job=#{job}
-		where uId=#{uId}
+						email=#{email}, zipCode=#{zipCode}, address=#{address}, gender=#{gender}
+		where uId='${uId}'
 	</update>
 	
 	<select id="member_email_validation" parameterType="String" resultType="String">
 		select email from user
-		where email = '${_parameter}'
+		where email='${_parameter}'
 	</select>
 
 	<select id="member_phone_validation" parameterType="String" resultType="String">
 		select phone from user
-		where phone = '${_parameter}'
+		where phone='${_parameter}'
 	</select>
 
 </mapper>

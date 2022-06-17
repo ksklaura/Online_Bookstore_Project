@@ -2,7 +2,7 @@
  *  SCRIPT FOR MY PAGE
  */
 
-mypage = {};
+let mypage = {};
 
 /*
 	// 로그인 후 마이페이지 접속 가능
@@ -15,41 +15,6 @@ mypage = {};
 		}
 }*/
 
-
-/*(	
-mypage = function(frm){ // 초기화면 동작할 수 있게끔
-	
-	/*let frm=$(".frm_order_list");
-	frm.action='../../mypage.do';
-	frm.submit();
-	console.log("frm : ", frm);*/
-	
-	/*$('.frm_order_list').load('../../mypage.do');*/
-	
-	/*$.post('mypage.do?job=select');*/
-	
-	/*let orderNo = frm.orderNo.value;
-	let bookCode = frm.bookCode.value;
-	let bookTitle = frm.bookTitle.value;
-	let price = frm.price.value;
-	let ea = frm.ea.value;
-	let amt = frm.amt.value;
-	let bookImage = frm.bookImage.value;
-	let orderDate = frm.orderDate.value;
-	let paymentType = frm.paymentType.value;
-	let zipCode = frm.zipCode.value;
-	let address = frm.address.value;
-	let phone = frm.phone.value;
-	
-	let param = $(frm).serialize();
-	$.post("../../mypage.do?job=select", param)
-}
-)()*/
-
-/*mypage.init=function(){
-	console.log("init");
-}*/
-
 // 모든 곳에 엔터만 치면 폼 submit하는 만능 함수
 function enterKey(b){
 	if(window.event.keyCode == 13){
@@ -59,12 +24,47 @@ function enterKey(b){
 
 // 마이페이지 메인 화면으로
 mypage.toMainPage = function(){
-	location.href = 'user_mypage_main.jsp';
+	location.href = './user/mypage/user_mypage_main.jsp';
 }
 
 
 /* ----- 회원정보 수정 페이지 ----- */
 
+// 마이페이지 메인화면에서 회원정보 수정 클릭시 id 넘겨서 값 받아오기
+mypage.selectOneInfo = function(frm){
+	frm.action = '../../mypage.do?job=selectOneInfo';
+	frm.submit();
+}
+
+// 회원정보 수정 (수정 페이지에서 저장 버튼 누를 때)
+
+mypage.updateInfo = function(frm){
+	let uId = frm.uId.value;
+	let pwd = frm.pwd.value;
+	let uName = frm.uName.value;
+	let email = frm.email.value;
+	let phone = frm.phone.value;
+	let birth = frm.birth.value;
+	
+	if(!isPwd(pwd)) {
+		alert("비밀번호 확인 후 다시 입력해주세요.");
+		return;
+	} else if(!isEmail(email)) {
+		alert("이메일 확인 후 다시 입력해주세요.");
+		return;
+	} else if(!isPhone(phone)) {
+		alert("휴대폰번호 확인 후 다시 입력해주세요.");
+		return;
+	} else if(!isBirth(birth)) {
+		alert("생년월일 확인 후 다시 입력해주세요.");
+		return;
+	} else {
+		alert("회원정보가 수정되었습니다.");
+		frm.action = './mypage.do?job=update';
+		frm.submit();
+	}
+	
+}
 
 // 우편번호 검색
 var btnZipFind = document.getElementById('btnZipFind');
@@ -81,7 +81,6 @@ if(btnZipFind != null){
 }
 
 // 재입력 요청
-
 $("#pwd").on("blur", function(){
 	let pwd = $(this).val();
 	
@@ -99,8 +98,6 @@ $("#email").on("blur", function(){
 		$("#emailValidation").text("이메일을 정확하게 입력해주세요.")
 	} else{
 		$("#emailValidation").text("")
-		// 중복 테스트
-		$("#emailValidation").load("../../mypage.do?job=memberEmailValidation", "email="+email);
 	}
 })
 
@@ -111,8 +108,6 @@ $("#phone").on("blur", function(){
 		$("#phoneValidation").text("휴대폰 번호를 다시 확인해주세요.")
 	} else{
 		$("#phoneValidation").text("")
-		// 중복 테스트
-		$("#phoneValidation").load("../../mypage.do?job=memberPhoneValidation", "phone="+phone);
 	}
 })
 
@@ -185,58 +180,23 @@ function isBirth(birth) {
 	}
 }
 
-// 회원정보 수정 (수정 페이지에서 저장 버튼 누를 때)
-
-mypage.updateInfo = function(frm){
-	let uId = frm.uId.value;
-	let pwd = frm.pwd.value;
-	let uName = frm.uName.value;
-	let email = frm.email.value;
-	let phone = frm.phone.value;
-	let birth = frm.birth.value;
-		
-	
-	if(!isPwd(pwd)) {
-		alert("비밀번호 확인 후 다시 입력해주세요.");
-		return
-	} else if(!isEmail(email)) {
-		alert("이메일 확인 후 다시 입력해주세요.");
-		return
-	} else if(!isPhone(phone)) {
-		alert("휴대폰번호 확인 후 다시 입력해주세요.");
-		return
-	} else if(!isBirth(birth)) {
-		alert("생년월일 확인 후 다시 입력해주세요.");
-		return
-	} else {
-		let param = $(frm).serialize();
-		$.post("../../mypage.do?job=update", param, function(){
-			location.href = "user_mypage_main.jsp"
-			alert("회원정보가 수정되었습니다.");
-		});
-	}
-}
-
-
 /* ----- 주문정보 조회 ----- */
 
-mypage.select=function(){
-	let frm = $('.frm_order_list')[0]; 					// frm값들을 배열로 만들고 배열의 0번째 행에 frm을 넣는 것.
-	frm.nowPage.value=1;			   					// 0번째 행에 들어간 frm 값들 중 nowPage 값은 1임.
-	// var param = $('.frm_order_list').serializeArray();  // param이라는 변수 값을 만들어 그 안에 frm값을 배열형태로 집어넣음.
-	// $.post('mypage.do?job=select', param);	   			// (findStr값과 nowPage값을 서블릿으로 넘김.) servlet으로 고고하여 servlet으로부터 다시 전달받은 값을 load
-	$.post('mypage.do?job=select');
-	
-	/*
-	frm.action = 'mypage.do?job=select';
+// 마이페이지 메인화면에서 주문정보 조회 클릭시 id 넘겨서 값 받아오기
+mypage.selectOrder = function(frm){
+	// let uId = frm.uId.value;
+	frm.action = '../../mypage.do?job=selectOrder';
 	frm.submit();
-	*/
 }
+
+/*function getId(uId){
+	return document.getElementById(uId);
+}*/
 
 // 페이지 이동
 mypage.movePage = function(page){ // paging 처리하는 function
 	let frm = $('.frm_order_list')[0]; 
 	frm.nowPage.value = page;
-	frm.action = 'mypage.do?job=select';
+	frm.action = './mypage.do?job=selectOrder';
 	frm.submit();
 }
