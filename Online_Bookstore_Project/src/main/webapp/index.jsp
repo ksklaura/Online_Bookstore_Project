@@ -7,6 +7,6 @@
 <title>가짜 index</title>
 </head>
 <body>
-	메인 페이지라고 치자~_~
+	메인 페이지라고 치자
 </body>
 </html>

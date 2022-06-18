@@ -19,9 +19,9 @@
 		<h2>주문내역 조회</h2>
 		<form name='frm_order_list' id='frm_order_list' class='frm_order_list' method="post" onsubmit='return false'>
 			<input type='text' name='findStr' id='findStr' value='${param.findStr}' onkeypress='if(event.keyCode == 13){mypage.select(this.form);}'/>
-			<button type='button' class='button' onclick='mypage.selectOrder(this.form)'>조회</button>
+			<button type='button' class='button' onclick='mypage.select(this.form)'>조회</button>
 			<input type='hidden' name='nowPage' value='${param.nowPage}'/>
-			<input type='text' name='uId' id='uId' value='${vo.uId}'/>
+			<input type='hidden' name='uId' id='uId' value='${vo.uId}'/>
 			<br/>
 			<br/>
 			<div id='lists'>
@@ -43,12 +43,10 @@
 				</div>
 				
 				<div class='items'>
-					<c:set var='i' value='${page.startNo+1}'/> 			<%-- 제로베이스라 +1이 필요함. --%>
-					<%-- <c:set var='pos' value='0'/>  --%>				<%-- 항상 0부터 시작 --%>
-					<c:set var='j' value='1'/>
-					<c:forEach var='vo' items='${list}' varStatus='sts'> 				<%-- 여기 list가 Servlet의 req.setAttribute("list", list); 에서 가져온 list임. requestScope.list를 줄여서 쓴 것 --%>
-						<div class='item'>
-							<span class='no'>${j}</span> 
+					<c:set var='i' value='${page.startNo+1}'/> 				<%-- 제로베이스라 +1이 필요함. --%>
+					<c:forEach var='vo' items='${list}' varStatus='sts'> 	<%-- 여기 list가 Servlet의 req.setAttribute("list", list); 에서 가져온 list임. requestScope.list를 줄여서 쓴 것 --%>
+						<div class='item'>									<!-- onclick='mypage.viewOrderDetail(${vo.orderNo})' -->
+							<span class='no'>${i}</span> 
 							<span class='orderNo'>${vo.orderNo}</span>
 							<span class='code'>${vo.code}</span>
 							<span class='codeName'>${vo.codeName}</span>
@@ -64,8 +62,6 @@
 							<span class='rPhone'>${vo.rPhone}</span>
 						</div>
 						<c:set var='i' value='${i=i+1}'/>
-						<%-- <c:set var='pos' value='${pos=pos+1}'/> --%>
-						<c:set var='j' value='${j=j+1}'/>
 					</c:forEach>
 					
 				</div>
@@ -85,6 +81,7 @@
 					<button type='button' id='btnLastPage' onclick='mypage.movePage(${page.totPage})'>끝</button>
 				</c:if>
 			</div>
+			<button type='button' class='btnToMain' onclick='mypage.toMainPage()'>이전 페이지</button>
 			
 			<c:if test='${not empty msg}'>
 				<script>

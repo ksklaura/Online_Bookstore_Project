@@ -15,7 +15,7 @@ let mypage = {};
 		}
 }*/
 
-// 모든 곳에 엔터만 치면 폼 submit하는 만능 함수
+// 모든 곳에 엔터치면 폼 submit하는 함수
 function enterKey(b){
 	if(window.event.keyCode == 13){
 		b.click();
@@ -25,6 +25,11 @@ function enterKey(b){
 // 마이페이지 메인 화면으로
 mypage.toMainPage = function(){
 	location.href = './user/mypage/user_mypage_main.jsp';
+}
+
+// 홈화면(index)으로
+mypage.toIndexPage = function(){
+	location.href = '../../index.jsp';
 }
 
 
@@ -184,17 +189,28 @@ function isBirth(birth) {
 
 // 마이페이지 메인화면에서 주문정보 조회 클릭시 id 넘겨서 값 받아오기
 mypage.selectOrder = function(frm){
-	// let uId = frm.uId.value;
+	let uId = frm.uId.value;
+	console.log(uId);
 	frm.action = '../../mypage.do?job=selectOrder';
 	frm.submit();
 }
 
-/*function getId(uId){
-	return document.getElementById(uId);
+// 조회
+mypage.select = function(frm){
+	frm.action = './mypage.do?job=searchOrder'; /*selectOrder*/
+	frm.submit();
+}
+
+/* 주문내역 상세보기 페이지로 이동
+mypage.viewOrderDetail = function(orderNo){
+	let frm = $('.frm_order_list')[0];
+	frm.sno.value = sno;
+	frm.action = './mypage.do?job=viewOrderDetail';
+	frm.submit();
 }*/
 
 // 페이지 이동
-mypage.movePage = function(page){ // paging 처리하는 function
+mypage.movePage = function(page){
 	let frm = $('.frm_order_list')[0]; 
 	frm.nowPage.value = page;
 	frm.action = './mypage.do?job=selectOrder';

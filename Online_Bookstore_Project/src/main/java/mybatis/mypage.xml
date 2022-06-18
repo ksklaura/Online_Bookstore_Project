@@ -4,28 +4,64 @@
 <mapper namespace="mypage">
 
 	<select id="tot_size" parameterType="bean.Page" resultType="Integer"> <!-- 검색어에 해당하는 자료의 건수 -->
-		select count(sno) from orders o left join item i
+		select count(o.sno) from orders o join item i
 		on o.code = i.code
 		where o.uId='${uId}'
-		or o.orderNo like 		'%${findStr}%' 
+  		<!-- (o.orderNo like 		'%${findStr}%'
 		or o.code like  		'%${findStr}%' 
 		or i.codeName like  	'%${findStr}%' 
-		or o.orderDate like 	'%${findStr}%'
+		or o.orderDate like 	'%${findStr}%' -->
 	</select>
 
 	<select id="selectOrder" parameterType="bean.Page" resultType="mypage.UserMypageVo">
 		select o.orderNo, o.code, i.codeName, i.price, o.orderEa, o.amt, i.img, o.orderDate, 
 			   o.paymentType, o.rName, o.rZipcode, o.rAddress, o.rPhone 
-		from orders o left join item i
+		from orders o join item i
 		on o.code = i.code
 		where o.uId='${uId}'
-		or o.orderNo like 		'%${findStr}%' 
+   		<!-- (o.orderNo like 		'%${findStr}%'
+		or o.code like  		'%${findStr}%' 
+		or i.codeName like  	'%${findStr}%' 
+		or o.orderDate like 	'%${findStr}%') -->
+		order by orderNo
+		limit ${startNo}, ${listSize}
+	</select>
+	
+	<select id="tot_size2" parameterType="bean.Page" resultType="Integer">
+		select count(o.sno) from orders o join item i
+		on o.code = i.code
+   		or o.orderNo like 		'%${findStr}%'
+		or o.code like  		'%${findStr}%' 
+		or i.codeName like  	'%${findStr}%' 
+		or o.orderDate like 	'%${findStr}%'
+	</select>
+	
+	<select id="searchOrder" parameterType="bean.Page" resultType="mypage.UserMypageVo">
+		select o.orderNo, o.code, i.codeName, i.price, o.orderEa, o.amt, i.img, o.orderDate, 
+			   o.paymentType, o.rName, o.rZipcode, o.rAddress, o.rPhone 
+		from orders o join item i
+		on o.code = i.code
+		or o.orderNo like 		'%${findStr}%'
 		or o.code like  		'%${findStr}%' 
 		or i.codeName like  	'%${findStr}%' 
 		or o.orderDate like 	'%${findStr}%'
 		order by orderNo
 		limit ${startNo}, ${listSize}
 	</select>
+	
+	<!-- <select id="viewOrderDetail" parameterType="String" resultType="mypage.UserMypageVo">
+		select o.orderNo, o.code, i.codeName, i.price, o.orderEa, o.amt, i.img, o.orderDate, 
+			   o.paymentType, o.rName, o.rZipcode, o.rAddress, o.rPhone 
+		from orders o left join item i
+		on o.code = i.code
+		where o.orderNo=#{_parameter}
+		or o.orderNo like 		'%${findStr}%' 
+		or o.code like  		'%${findStr}%' 
+		or i.codeName like  	'%${findStr}%' 
+		or o.orderDate like 	'%${findStr}%'
+		order by orderNo
+		limit ${startNo}, ${listSize}
+	</select> -->
 	
 	<!-- 회원정보 수정 페이지에 기존 정보 뿌리기 -->
 	<select id="selectOneInfo" parameterType="String" resultType="mypage.UserMypageVo">

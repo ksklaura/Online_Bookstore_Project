@@ -1,5 +1,120 @@
 @charset "UTF-8";
 
+/* MYPAGE - MAIN */
+
+#mypage_main{
+	font-family: 나눔바른고딕 Light;
+	font-size: 14px;
+	margin: auto;
+	width: 1200px;	
+}
+#mypage_main>#frm_mypage_main .header1{
+	background-color: rgb(243, 243, 243);
+	height: 320px;
+}
+#mypage_main>#frm_mypage_main .header2{
+	height: 220px;
+    margin-bottom: 58px;
+    background: linear-gradient(91.19deg, rgb(254, 143, 113) 0.27%, rgb(255, 111, 97) 100%);
+    box-shadow: rgb(218 218 218 / 20%) 0px 6px 20px;
+    padding: 40px 20px 20px;
+    box-sizing: border-box;
+}
+#mypage_main>#frm_mypage_main .userInfo{
+	padding: 0px 4px;
+	margin-left: 100px;
+    color: rgb(255, 255, 255);
+}
+#mypage_main>#frm_mypage_main .uName{
+	font-size: 30px;
+	font-family: DX시인과나;
+	padding-bottom: 5px;
+}
+#mypage_main>#frm_mypage_main .henry{
+	margin-left:780px;
+	padding-bottom: 5px;
+}
+#mypage_main>#frm_mypage_main .welcome{
+	font-size: 20px;
+}
+#mypage_main>#frm_mypage_main .infoBoard-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+}
+#mypage_main>#frm_mypage_main .infoBoard-wrapper .infoBoard {
+    height: 90px;
+    width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    border-radius: 12px;
+    padding: 14px 40px 16px;
+    margin-top: 40px;
+    box-sizing: border-box;
+}
+#mypage_main>#frm_mypage_main .button1{
+	border-bottom: 1px solid rgb(236, 236, 236);
+	height: 100px;
+}
+#mypage_main>#frm_mypage_main .button2{
+	padding-top: 15px;
+	border-bottom: 1px solid rgb(236, 236, 236);
+	height: 100px;
+}
+#mypage_main>#frm_mypage_main .btnIcon{
+	background-color: #fff;
+	border: none;
+	margin-bottom: 10px;
+	width: 1200px;
+	height: 100px;
+	text-align: center;
+	font-size: 5em;
+	font-family: 나눔바른고딕 Light;
+}
+#mypage_main>#frm_mypage_main .btnIcon:hover{
+	--color: #ffb2f5;
+	color: #FEB49B;
+	cursor: pointer;
+	transition : all .5s;
+}
+#mypage_main>#frm_mypage_main .text1{
+	font-size: 20px;
+	font-family: 나눔바른고딕 Light;
+	margin-left: 30px;
+	vertical-align: middle;
+}
+#mypage_main>#frm_mypage_main .text2{
+	font-size: 20px;
+	font-family: 나눔바른고딕 Light;
+	margin-left: 30px;
+	vertical-align: middle;
+}
+#mypage_main>#frm_mypage_main .text1:hover, .text2:hover{
+	color: #FEB49B;
+	cursor: pointer;
+	transition : all .5s;
+}
+#mypage_main>#frm_mypage_main .btnToIndex{
+	background-color: #F9CEC2;
+	border: 1px solid #FE8F71;
+	border-radius: 5px;
+	width: 140px;
+	height: 20px;
+	font-family: 나눔바른고딕 Light;
+}
+#mypage_main>#frm_mypage_main .btnToIndex:hover{
+	cursor: pointer;
+	background-color: #FE8F71;
+	border: 1px solid #FE8F71;
+	border-radius: 5px;
+	color: #fff;
+	transition : all .2s;
+}
+
+
 /* MYPAGE - ORDER LIST */
 
 #order_list{
@@ -17,6 +132,7 @@
 #order_list .frm_order_list{
 	--padding-top: 7px;
 	text-align: right;
+	--width: 1200px;
 }
 
 #order_list>#frm_order_list>#findStr{
@@ -38,17 +154,20 @@
 	border: 1px solid #ffb2f5;
 	border-radius: 5px;
 	color: #fff;
-	font-family: 나눔바른고딕 Light;
 	transition : all .2s;
-}
-#order_list>#lists{
-	width: 1200px;
 }
 
 #order_list .titles{
 	background-color: #ffb2f5;
 	color: #fff;
-	padding: 2px 5px;
+	padding: 3px 5px;
+	display: table;
+	width: 1200px;
+}
+
+#order_list .titles span{
+	display: table-cell;
+	vertical-align: middle;
 }
 
 #order_list span{
@@ -57,8 +176,9 @@
 }
 
 #order_list .item{
-	padding-top: 5px;
-	padding-bottom: 5px;
+	--padding-top: 7px;
+	--padding-bottom: 5px;
+	padding: 4px 5px;
 	display: table;
 	width: 1200px;
 }
@@ -68,24 +188,25 @@
 	vertical-align: middle;
 }
 
-#order_list .item .no{
-	width: 70px;
+#order_list .no{
+	width: 30px;
+	--padding-right: 60px;
 	--text-align: center;
 }
 
 #order_list .orderNo{width:80px;}
 #order_list .code{width:80px;}
-#order_list .codeName{width:90px; }
-#order_list .price{width:80px; }
-#order_list .orderEa{width:80px; }
-#order_list .amt{width:80px;}
+#order_list .codeName{width:100px; }
+#order_list .price{width:60px; }
+#order_list .orderEa{width:25px; }
+#order_list .amt{width:60px;}
 #order_list .img{width:80px; }
 #order_list .orderDate{width:80px; }
 #order_list .paymentType{width:60px; }
-#order_list .rName{width:80px; }
-#order_list .rZipcode{width:80px; }
-#order_list .rAddress{width:100px; }
-#order_list .rPhone{width:80px; }
+#order_list .rName{width:50px; }
+#order_list .rZipcode{width:50px; }
+#order_list .rAddress{width:160px; }
+#order_list .rPhone{width:70px; }
 
 #order_list .item:hover{
 	cursor: pointer;
@@ -124,6 +245,23 @@
 	border-radius: 100px;
 	cursor: pointer;
 	font-family: 나눔바른고딕 Light;
+	transition : all .2s;
+}
+
+#order_list .btnToMain{
+	background-color: #ffebff;
+	border: 1px solid #ffb2f5;
+	border-radius: 5px;
+	width: 80px;
+	height: 20px;
+	font-family: 나눔바른고딕 Light;
+}
+#order_list .btnToMain:hover{
+	cursor: pointer;
+	background-color: #ffb2f5;
+	border: 1px solid #ffb2f5;
+	border-radius: 5px;
+	color: #fff;
 	transition : all .2s;
 }
 

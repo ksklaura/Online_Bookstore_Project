@@ -25,12 +25,6 @@ public class UserMypageDao implements UserMypageInterface {
 	
 
 	@Override
-	public boolean insert(UserMypageVo vo) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public List<UserMypageVo> selectOrder(Page page) {
 		List<UserMypageVo> list = null;
 		
@@ -42,6 +36,24 @@ public class UserMypageDao implements UserMypageInterface {
 			this.page = page;
 			
 			list = session.selectList("mypage.selectOrder", page);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
+	public List<UserMypageVo> searchOrder(Page page) {
+		List<UserMypageVo> list = null;
+		
+		try {
+			int totSize = session.selectOne("mypage.tot_size2", page);
+			page.setTotSize(totSize);
+			page.compute();
+			page.setStartNo(page.getStartNo()-1);
+			this.page = page;
+			
+			list = session.selectList("mypage.searchOrder", page);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -63,6 +75,17 @@ public class UserMypageDao implements UserMypageInterface {
 		}
 		return vo;
 	}
+
+//	@Override
+//	public List<UserMypageVo> selectOneOrder(String orderNo) {
+//		List<UserMypageVo> vo = null;
+//		try {
+//			vo = session.selectOne("mypage.viewOrderDetail", orderNo);
+//		}catch(Exception ex) {
+//			ex.printStackTrace();
+//		}
+//		return vo;
+//	}
 
 	// 회원정보 수정
 	@Override
