@@ -18,6 +18,8 @@ public class Page {
 	int nowPage;		// 사용자가 보고있는 현재 페이지
 	String findStr; 	// 검색창
 	String uId;
+	String orderNo;
+	int totSize2;		// "외 n건" 출력을 위함
 	
 	public Page() {
 		compute();
@@ -116,6 +118,18 @@ public class Page {
 	}
 	public void setuId(String uId) {
 		this.uId = uId;
+	}
+	public String getOrderNo() {
+		return orderNo;
+	}
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+	public int getTotSize2() {
+		return totSize2;
+	}
+	public void setTotSize2(int totSize2) {
+		this.totSize2 = totSize2;
 	}
 	
 }

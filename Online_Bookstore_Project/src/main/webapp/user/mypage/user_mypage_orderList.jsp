@@ -18,10 +18,11 @@
 	<div id='order_list'>
 		<h2>주문내역 조회</h2>
 		<form name='frm_order_list' id='frm_order_list' class='frm_order_list' method="post" onsubmit='return false'>
-			<input type='text' name='findStr' id='findStr' value='${param.findStr}' onkeypress='if(event.keyCode == 13){mypage.select(this.form);}'/>
-			<button type='button' class='button' onclick='mypage.select(this.form)'>조회</button>
+			<%-- <input type='text' name='findStr' id='findStr' value='${param.findStr}' onkeypress='if(event.keyCode == 13){mypage.select(this.form);}'/>
+			<button type='button' class='button' onclick='mypage.select(this.form)'>조회</button> --%>
 			<input type='hidden' name='nowPage' value='${param.nowPage}'/>
-			<input type='hidden' name='uId' id='uId' value='${vo.uId}'/>
+			<input type='hidden' name='uId' id='uId' value='${param.uId}'/>
+			
 			<br/>
 			<br/>
 			<div id='lists'>
@@ -32,38 +33,41 @@
 					<span class='codeName'>도서명</span>
 					<span class='price'>판매가</span>
 					<span class='orderEa'>수량</span>
-					<span class='amt'>총 금액</span>
-					<span class='img'>도서 이미지</span>
+					<span class='amt'>금액</span>
 					<span class='orderDate'>구매일자</span>
-					<span class='paymentType'>결제방식</span>
+					<span class='img'>도서 이미지</span>
+					<!-- <span class='paymentType'>결제방식</span>
 					<span class='rName'>수령인</span>
 					<span class='rZipcode'>우편번호</span>
 					<span class='rAddress'>주소</span>
-					<span class='rPhone'>전화번호</span>
+					<span class='rPhone'>전화번호</span> -->
 				</div>
 				
 				<div class='items'>
-					<c:set var='i' value='${page.startNo+1}'/> 				<%-- 제로베이스라 +1이 필요함. --%>
-					<c:forEach var='vo' items='${list}' varStatus='sts'> 	<%-- 여기 list가 Servlet의 req.setAttribute("list", list); 에서 가져온 list임. requestScope.list를 줄여서 쓴 것 --%>
-						<div class='item'>									<!-- onclick='mypage.viewOrderDetail(${vo.orderNo})' -->
+					<c:set var='i' value='${page.startNo+1}'/> 
+					<c:forEach var='vo' items='${list}' varStatus='sts'>
+		                <c:set var='totAmt' value='${vo.orderEa * vo.price}'/>
+						<div class='item' onclick='mypage.viewOrderDetail(this.form)'> <!-- "${vo.orderNo}"  -->
 							<span class='no'>${i}</span> 
 							<span class='orderNo'>${vo.orderNo}</span>
 							<span class='code'>${vo.code}</span>
 							<span class='codeName'>${vo.codeName}</span>
 							<span class='price'><fmt:formatNumber>${vo.price}</fmt:formatNumber></span>
 							<span class='orderEa'><fmt:formatNumber>${vo.orderEa}</fmt:formatNumber></span>
-							<span class='amt'><fmt:formatNumber>${vo.amt}</fmt:formatNumber></span>
-							<span class='img'><img src="${vo.img}" width="100px"/></span>
+							<span class='amt'><fmt:formatNumber>${totAmt}</fmt:formatNumber></span>
 							<span class='orderDate'>${vo.orderDate}</span>
-							<span class='paymentType'>${vo.paymentType}</span>
+							<span class='img'><img src='${vo.img}' width='100px'/></span>
+							<%-- <span class='paymentType'>${vo.paymentType}</span>
 							<span class='rName'>${vo.rName}</span>
 							<span class='rZipcode'>${vo.rZipcode}</span>
 							<span class='rAddress'>${vo.rAddress}</span>
-							<span class='rPhone'>${vo.rPhone}</span>
+							<span class='rPhone'>${vo.rPhone}</span> --%>
 						</div>
-						<c:set var='i' value='${i=i+1}'/>
+						<c:set var='tot' value='${vo.orderNo}'/>
+			            <c:set var='totAmt' value='0'/>
+			            <input type='hidden' name='orderNo' value='${vo.orderNo}'/>
+					<c:set var='i' value='${i=i+1}'/>
 					</c:forEach>
-					
 				</div>
 			</div>
 			<div class='paging'>
@@ -81,14 +85,8 @@
 					<button type='button' id='btnLastPage' onclick='mypage.movePage(${page.totPage})'>끝</button>
 				</c:if>
 			</div>
-			<button type='button' class='btnToMain' onclick='mypage.toMainPage()'>이전 페이지</button>
-			
-			<c:if test='${not empty msg}'>
-				<script>
-					alert('${msg}');
-				</script>
-			</c:if>
 		</form>
+		<button type='button' class='btnToMain' onclick='mypage.toMainPage()'>이전 페이지</button>
 	</div>
 	
 </body>

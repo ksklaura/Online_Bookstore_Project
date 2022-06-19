@@ -22,6 +22,11 @@ function enterKey(b){
 	}
 }
 
+// 주문내역 조회 화면으로
+mypage.toPrevPage = function(){
+	location.href = './user/mypage/user_mypage_orderList.jsp';
+}
+
 // 마이페이지 메인 화면으로
 mypage.toMainPage = function(){
 	location.href = './user/mypage/user_mypage_main.jsp';
@@ -190,24 +195,26 @@ function isBirth(birth) {
 // 마이페이지 메인화면에서 주문정보 조회 클릭시 id 넘겨서 값 받아오기
 mypage.selectOrder = function(frm){
 	let uId = frm.uId.value;
-	console.log(uId);
+	frm.uId.value = uId;
 	frm.action = '../../mypage.do?job=selectOrder';
 	frm.submit();
 }
 
 // 조회
 mypage.select = function(frm){
-	frm.action = './mypage.do?job=searchOrder'; /*selectOrder*/
+	//frm.nowPage.value = 1;
+	frm.action = './mypage.do?job=selectOrder'; /*selectOrder*/
 	frm.submit();
 }
 
-/* 주문내역 상세보기 페이지로 이동
-mypage.viewOrderDetail = function(orderNo){
+// 주문내역 상세보기 페이지로 이동
+mypage.viewOrderDetail = function(orderNo){ /*orderNo*/
 	let frm = $('.frm_order_list')[0];
-	frm.sno.value = sno;
+	//let orderNo = frm.orderNo.value;
+	frm.orderNo.value = orderNo;
 	frm.action = './mypage.do?job=viewOrderDetail';
 	frm.submit();
-}*/
+}
 
 // 페이지 이동
 mypage.movePage = function(page){

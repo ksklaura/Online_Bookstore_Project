@@ -59,9 +59,9 @@
 				<input type='text' name='zipCode' id='zipCode' value='${vo.zipCode}' readonly/>
 				<button type='button' id='btnZipFind'>우편번호 찾기</button><br/>
 				<label>주소</label>
-				<input type='text' name='address1' id='address1' value='${vo.address}' readonly/><br/>
+				<input type='text' name='address1' id='address1' value='${vo.address1}' readonly/><br/>
 				<label>상세주소</label>
-				<input type='text' name='address2'/><br/>
+				<input type='text' name='address2' id='address2' value='${vo.address2}'/><br/>
 			</div>
 			
 			<div class='label_group'>

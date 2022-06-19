@@ -20,7 +20,6 @@
 	
 	<mappers>
 		<mapper resource="mybatis/mypage.xml"/>
-		<mapper resource="mybatis/cart.xml"/>
 	</mappers>
 	
 	

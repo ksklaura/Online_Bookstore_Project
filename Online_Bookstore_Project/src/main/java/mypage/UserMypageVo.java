@@ -13,19 +13,23 @@ public class UserMypageVo {
 	String rZipcode; 		 // 배송지 우편번호
 	String rAddress; 		 // 배송지 주소
 	String paymentType; 	 // 결제 방식
+	String remark;			 // 메모
+	
+	int totalAmt;			 // 최종 금액 ★★★★★
 	
 	// 여기는 ITEM
 	String codeName; 		 // 구매한 도서명
 	int price; 				 // 도서 판매가
 	String img; 			 // 도서 이미지
 
-	// 여기는 USER (uId, zipCode, address, phone 제외하고)
+	// 여기는 USER (uId 제외하고)
 	String pwd;
 	String uName;
 	String birth;
 	String phone;
 	String email;
-	String address;
+	String address1;
+	String address2;
 	String zipCode;
 	String gender;
 	String date;
@@ -36,7 +40,8 @@ public class UserMypageVo {
 	public UserMypageVo(String orderNo, String uId, String code, int orderEa, int amt, String orderDate, 
 						String rName, String rPhone, String rZipcode, String rAddress, String paymentType,
 						String codeName, int price, String img, String pwd, String uName, String birth,
-						String phone, String email, String address, String zipCode, String gender, String date, String job) {
+						String phone, String email, String address1, String address2, String zipCode, String gender, String date, 
+						String job, int totalAmt, String remark) {
 		this.orderNo = orderNo;
 		this.uId = uId;
 		this.code = code;
@@ -48,6 +53,7 @@ public class UserMypageVo {
 		this.rZipcode = rZipcode;
 		this.rAddress = rAddress; 
 		this.paymentType = paymentType;
+		this.remark = remark;
 		
 		this.codeName = codeName;
 		this.price = price; 
@@ -58,11 +64,14 @@ public class UserMypageVo {
 		this.birth = birth;
 		this.phone = phone;
 		this.email = email;
-		this.address = address;
+		this.address1 = address1;
+		this.address2 = address2;
 		this.zipCode = zipCode;
 		this.gender = gender;
 		this.date = date;
 		this.job = job;
+		
+		this.totalAmt = totalAmt;
 	}
 	
 	/* GETTERS AND SETTERS */
@@ -181,11 +190,17 @@ public class UserMypageVo {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getAddress() {
-		return address;
+	public String getAddress1() {
+		return address1;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+	public String getAddress2() {
+		return address2;
+	}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
 	}
 	public String getZipCode() {
 		return zipCode;
@@ -210,6 +225,18 @@ public class UserMypageVo {
 	}
 	public void setJob(String job) {
 		this.job = job;
+	}
+	public int getTotalAmt() {
+		return totalAmt;
+	}
+	public void setTotalAmt(int totalAmt) {
+		this.totalAmt = totalAmt;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 }

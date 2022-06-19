@@ -16,7 +16,7 @@ public class UserMypageDao implements UserMypageInterface {
 	HttpSession s;
 	Page page;
 	AES aes;
-	
+		
 	public UserMypageDao() {
 		session = MybaFactory.getFactory().openSession();
 		aes = new AES();
@@ -27,15 +27,26 @@ public class UserMypageDao implements UserMypageInterface {
 	@Override
 	public List<UserMypageVo> selectOrder(Page page) {
 		List<UserMypageVo> list = null;
+		List<UserMypageVo> orderNoList = null;
+		//UserMypageVo vo = new UserMypageVo();
+		//String uId = vo.getuId();
 		
 		try {
 			int totSize = session.selectOne("mypage.tot_size", page);
+			
+			orderNoList = session.selectList("mypage.selectDistinctOrder", page);
+			int totSize2 = session.selectOne("mypage.tot_size2", page);
+			
 			page.setTotSize(totSize);
 			page.compute();
-			page.setStartNo(page.getStartNo()-1); // 이걸 안 하면 목록의 첫번째 데이터가 누락됨.
+			page.setStartNo(page.getStartNo()-1);
+			page.setTotSize2(totSize2);
 			this.page = page;
 			
-			list = session.selectList("mypage.selectOrder", page);
+			//vo.setuId(uId);
+			
+			list = session.selectList("mypage.selectFirstOrder", orderNoList);
+			//list = session.selectList("mypage.selectOrder", page);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -43,23 +54,40 @@ public class UserMypageDao implements UserMypageInterface {
 	}
 	
 	@Override
-	public List<UserMypageVo> searchOrder(Page page) {
+	public List<UserMypageVo> selectOrderDetail(Page page) {
 		List<UserMypageVo> list = null;
-		
 		try {
-			int totSize = session.selectOne("mypage.tot_size2", page);
+			int totSize = session.selectOne("mypage.tot_size3", page);
 			page.setTotSize(totSize);
 			page.compute();
 			page.setStartNo(page.getStartNo()-1);
 			this.page = page;
 			
-			list = session.selectList("mypage.searchOrder", page);
-		}catch(Exception e) {
-			e.printStackTrace();
+			list = session.selectList("mypage.viewOrderDetail", page);
+		}catch(Exception ex) {
+			ex.printStackTrace();
 		}
 		return list;
 	}
 
+
+//	@Override 
+//	public List<UserMypageVo> searchOrder(Page page) {
+//		List<UserMypageVo> list = null;
+//		
+//		try { 
+//			int totSize = session.selectOne("mypage.tot_size2", page);
+//			page.setTotSize(totSize); page.compute();
+//			page.setStartNo(page.getStartNo()-1); 
+//			this.page = page;
+//			
+//			list = session.selectList("mypage.searchOrder", page); 
+//		}catch(Exception e) {
+//			e.printStackTrace(); 
+//		} 
+//		return list; 
+//	}
+	
 	@Override
 	public UserMypageVo selectOneInfo(String uId) {
 		UserMypageVo vo = null;
@@ -76,17 +104,6 @@ public class UserMypageDao implements UserMypageInterface {
 		return vo;
 	}
 
-//	@Override
-//	public List<UserMypageVo> selectOneOrder(String orderNo) {
-//		List<UserMypageVo> vo = null;
-//		try {
-//			vo = session.selectOne("mypage.viewOrderDetail", orderNo);
-//		}catch(Exception ex) {
-//			ex.printStackTrace();
-//		}
-//		return vo;
-//	}
-
 	// 회원정보 수정
 	@Override
 	public boolean update(UserMypageVo vo) {
@@ -101,12 +118,6 @@ public class UserMypageDao implements UserMypageInterface {
 			session.rollback();
 		}
 		return b;
-	}
-
-	@Override
-	public boolean delete(String uId, String pwd) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	public Page getPage() {

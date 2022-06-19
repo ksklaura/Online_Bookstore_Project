@@ -25,7 +25,7 @@
 					</div>
 					<div class='infoBoard-wrapper'>
 						<div class='infoBoard'>
-							<label>뭘 넣을지 고민중~_~</label>
+							<label>여기 뭘 넣을지 고민중..</label>
 						</div>
 					</div>
 				</div>

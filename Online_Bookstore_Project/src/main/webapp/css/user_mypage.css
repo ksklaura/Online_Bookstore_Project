@@ -121,7 +121,8 @@
 	font-family: 나눔바른고딕 Light;
 	font-size: 14px;
 	margin: auto;
-	width: 1200px;
+	width: 850px;
+	--text-align: center;
 }
 
 #order_list h2{
@@ -131,10 +132,9 @@
 
 #order_list .frm_order_list{
 	--padding-top: 7px;
-	text-align: right;
+	text-align: center;
 	--width: 1200px;
 }
-
 #order_list>#frm_order_list>#findStr{
 	border: 1px solid #ffb2f5;
 	font-family: 나눔바른고딕 Light;
@@ -162,14 +162,18 @@
 	color: #fff;
 	padding: 3px 5px;
 	display: table;
-	width: 1200px;
+	width: 850px;
 }
 
 #order_list .titles span{
 	display: table-cell;
 	vertical-align: middle;
 }
-
+#order_list>#frm_order_list .sum{
+	padding: 5px 0px;
+	font-family: 나눔바른고딕 Bold;
+	font-size: 15px;
+}
 #order_list span{
 	display: inline-block;
 	text-align: center;
@@ -180,7 +184,7 @@
 	--padding-bottom: 5px;
 	padding: 4px 5px;
 	display: table;
-	width: 1200px;
+	width: 850px;
 }
 
 #order_list .item span{
@@ -216,7 +220,7 @@
 }
 
 #order_list .item:nth-child(5n){
-	border-bottom: 1px solid #f00;
+	--border-bottom: 1px solid #f00;
 }
 
 #order_list .item:last-child{
@@ -255,8 +259,149 @@
 	width: 80px;
 	height: 20px;
 	font-family: 나눔바른고딕 Light;
+	text-align: left;
 }
 #order_list .btnToMain:hover{
+	cursor: pointer;
+	background-color: #ffb2f5;
+	border: 1px solid #ffb2f5;
+	border-radius: 5px;
+	color: #fff;
+	transition : all .2s;
+}
+
+/* MYPAGE - ORDER DETAIL */
+
+#order_detail{
+	font-family: 나눔바른고딕 Light;
+	font-size: 14px;
+	margin: auto;
+	width: 650px;
+}
+
+#order_detail h2{
+	font-family: 나눔바른고딕 Light;
+	text-align: center;
+}
+
+#order_detail .frm_order_detail{
+	--padding-top: 7px;
+	text-align: center;
+}
+#order_detail .titles{
+	background-color: #ffb2f5;
+	color: #fff;
+	padding: 3px 0px;
+	display: table;
+	width: 650px;
+}
+
+#order_detail .titles span{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#order_detail span{
+	display: inline-block;
+	text-align: center;
+}
+
+#order_detail .item{
+	--padding-top: 7px;
+	--padding-bottom: 5px;
+	padding: 4px 5px;
+	display: table;
+	width: 650px;
+}
+
+#order_detail .item span{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#order_detail .no{
+	width: 30px;
+	--padding-right: 60px;
+	--text-align: center;
+}
+
+#order_detail .code{padding-right: 30px; width:60px;}
+#order_detail .codeName{width:100px;}
+#order_detail .price{width:60px;}
+#order_detail .orderEa{width:25px;}
+#order_detail .amt{width:60px; }
+#order_detail .img{width:80px;}
+
+#order_detail .item:nth-child(5n){
+	--border-bottom: 1px solid #f00;
+}
+
+#order_detail .item:last-child{
+	border-bottom: 2px solid #ccc;
+	margin-bottom: 8px;
+}
+#order_detail>#inputs{
+	margin-left: 100px;
+}
+#order_detail>#inputs label{
+	display: inline-block;
+	width: 75px;
+	padding-left: 5px;
+	text-align: right;
+	margin-bottom: 10px;
+}
+#order_detail>#inputs input{
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+#order_detail .commonInfo{
+	border: 2px solid #C72FB3;
+	border-radius: 10px;
+	width: 300px;
+	padding: 25px 25px 15px 25px;
+	text-align: left;
+	font-size: 16px;
+	margin-left: 150px;
+}
+#order_detail .commonInfo span{
+	padding-bottom: 10px;
+	margin-left: 10px;
+	text-align: left;
+}
+#order_detail .dOrderDate{
+	padding-left: 14px;
+}
+#order_detail .dRName{
+	padding-left: 14px;
+}
+#order_detail .dRAddress{
+	padding-left: 14px;
+}
+#order_detail .dRPhone{
+	padding-left: 15px;
+}
+#order_detail .sum{
+	padding-left: 14px;
+}
+#order_detail .commonInfo hr{
+	background-color: #C72FB3;
+}
+#order_detail .commonInfo .sum{
+	margin-top: 10px;
+}
+#order_detail .commonInfo label{
+	font-weight: bold;
+	color: #C72FB3;
+}
+#order_detail .btnToPrev{
+	background-color: #ffebff;
+	border: 1px solid #ffb2f5;
+	border-radius: 5px;
+	width: 80px;
+	height: 20px;
+	font-family: 나눔바른고딕 Light;
+}
+#order_detail .btnToPrev:hover{
 	cursor: pointer;
 	background-color: #ffb2f5;
 	border: 1px solid #ffb2f5;
