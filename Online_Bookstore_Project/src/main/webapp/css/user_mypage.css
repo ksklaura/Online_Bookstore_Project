@@ -64,6 +64,11 @@
 	border-bottom: 1px solid rgb(236, 236, 236);
 	height: 100px;
 }
+#mypage_main>#frm_mypage_main .button3{
+	padding-top: 15px;
+	border-bottom: 1px solid rgb(236, 236, 236);
+	height: 100px;
+}
 #mypage_main>#frm_mypage_main .btnIcon{
 	background-color: #fff;
 	border: none;
@@ -92,7 +97,13 @@
 	margin-left: 30px;
 	vertical-align: middle;
 }
-#mypage_main>#frm_mypage_main .text1:hover, .text2:hover{
+#mypage_main>#frm_mypage_main .text3{
+	font-size: 20px;
+	font-family: 나눔바른고딕 Light;
+	margin-left: 30px;
+	vertical-align: middle;
+}
+#mypage_main>#frm_mypage_main .text1:hover, .text2:hover, .text3:hover{
 	color: #FEB49B;
 	cursor: pointer;
 	transition : all .5s;
@@ -286,7 +297,10 @@
 
 #order_detail .frm_order_detail{
 	--padding-top: 7px;
-	text-align: center;
+	--text-align: center;
+}
+#order_detail>#lists{
+	text-align: left;
 }
 #order_detail .titles{
 	background-color: #ffb2f5;
@@ -294,6 +308,7 @@
 	padding: 3px 0px;
 	display: table;
 	width: 650px;
+	--text-align: left;
 }
 
 #order_detail .titles span{
@@ -303,7 +318,7 @@
 
 #order_detail span{
 	display: inline-block;
-	text-align: center;
+	--text-align: center;
 }
 
 #order_detail .item{
@@ -312,6 +327,7 @@
 	padding: 4px 5px;
 	display: table;
 	width: 650px;
+	--text-align: left;
 }
 
 #order_detail .item span{
@@ -400,6 +416,7 @@
 	width: 80px;
 	height: 20px;
 	font-family: 나눔바른고딕 Light;
+	text-align: left;
 }
 #order_detail .btnToPrev:hover{
 	cursor: pointer;

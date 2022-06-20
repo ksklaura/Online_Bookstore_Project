@@ -135,10 +135,7 @@ public class UserMypageServlet extends HttpServlet{
 	
 	 public void viewOrderDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { 
 		 String url = base + "orderDetail.jsp";
-		 String orderNo = req.getParameter("orderNo"); 
-		 System.out.println(orderNo);
-		 //List<UserMypageVo> vo = dao.selectOrderDetail(orderNo);
-		 
+		 String orderNo = req.getParameter("orderNum"); 
 		 
 		 Page page = new Page();
 			
@@ -163,13 +160,6 @@ public class UserMypageServlet extends HttpServlet{
 					
 		rd = req.getRequestDispatcher(url);
 		rd.forward(req, resp);
-		 
-		 
-		 //req.setAttribute("orderNo", orderNo);
-		 //req.setAttribute("vo", vo);
-		 
-		 //rd = req.getRequestDispatcher(url); 
-		 //rd.forward(req, resp); 
 	}
 	 
 	

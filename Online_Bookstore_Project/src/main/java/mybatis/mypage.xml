@@ -27,7 +27,7 @@
 			   o.paymentType, o.rName, o.rZipcode, o.rAddress, o.rPhone
 		from orders o join item i
 		on o.code = i.code
-		where o.uId='${uId}' and orderNo='${_parameter}'
+		where o.uId='${uId}'<!--  and orderNo='${_parameter}' -->
 		order by orderDate desc
 		limit ${startNo}, ${listSize}
 	</select>
@@ -61,7 +61,7 @@
 			   o.paymentType, o.rName, o.rZipcode, o.rAddress, o.rPhone, o.remark
 		from orders o join item i
 		on o.code = i.code
-		where o.orderNo='${orderNo}' <!-- #{_parameter} -->
+		where o.orderNo='${orderNo}'
 	</select> 
 	
 	<!-- 회원정보 수정 페이지에 기존 정보 뿌리기 -->

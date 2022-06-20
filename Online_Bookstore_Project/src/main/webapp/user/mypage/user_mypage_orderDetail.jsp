@@ -19,9 +19,8 @@
 		<h2>주문내역 상세보기</h2>
 		<form name='frm_order_detail' id='frm_order_detail' class='frm_order_detail' method='post'>
 			<input type='hidden' name='nowPage' value='${param.nowPage}'/>
-			<input type='text' name='orderNo' value='${param.orderNo}'/>
-			<%-- <input type='text' name='orderNo' value='${vo.orderNo}'/> --%>
-			<br/>
+			<input type='hidden' name='orderNo' value='${param.orderNo}'/>
+			<input type='hidden' id='uId' name='uId' value='${param.uId}'/>
 			<br/>
 			<div id='lists'>
 				<div class='titles'>
@@ -38,19 +37,16 @@
 					<c:set var='j' value='1'/> <!-- ${page.startNo+1} -->
 					<c:forEach var='vo' items='${list}'> 					
 						<c:set var='totAmt' value='${vo.orderEa * vo.price}'/>
-						<c:if test='${vo.orderNo!=tot && tot!=null}'>
-		                	<%-- <span class='sum' id='sum'>총 금액 : <fmt:formatNumber>${sum}</fmt:formatNumber>원</span> --%>
-		                </c:if>
 						<div class='item'>
 							<span class='no'>${j}</span> 
 							<span class='code'>${vo.code}</span>
 							<span class='codeName'>${vo.codeName}</span>
-							<span class='price'><fmt:formatNumber>${vo.price}</fmt:formatNumber></span>
+							<span class='price'><fmt:formatNumber>${vo.price}</fmt:formatNumber>원</span>
 							<span class='orderEa'><fmt:formatNumber>${vo.orderEa}</fmt:formatNumber></span>
-							<span class='amt'><fmt:formatNumber>${totAmt}</fmt:formatNumber></span>
+							<span class='amt'><fmt:formatNumber>${totAmt}</fmt:formatNumber>원</span>
 							<span class='img'><img src="${vo.img}" width="100px"/></span>
 						</div>
-						<c:set var='tot' value='${vo.orderNo}'/>
+						<%-- <c:set var='tot' value='${vo.orderNo}'/> --%>
 			            <c:set var='sum' value='${vo.amt}'/>
 			            
 			            <c:set var='dOrderNo' value='${vo.orderNo}'/>
@@ -83,9 +79,10 @@
 			<input type='hidden' name='findStr' id='findStr' value='${param.findStr}'/>
 			<input type='hidden' name='nowPage' value='${param.nowPage}'/>
 			
-			<!-- <button type='button' class='btnToPrev' onclick='mypage.toPrevPage()'>이전 페이지</button> -->
 			<br/>
+			<button type='button' class='btnToPrev' onclick='mypage.select(this.form)'>이전 페이지</button>
 		</form>
+		<br/>
 	</div>
 	
 </body>

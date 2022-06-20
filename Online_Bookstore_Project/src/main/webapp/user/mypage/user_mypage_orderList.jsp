@@ -22,7 +22,7 @@
 			<button type='button' class='button' onclick='mypage.select(this.form)'>조회</button> --%>
 			<input type='hidden' name='nowPage' value='${param.nowPage}'/>
 			<input type='hidden' name='uId' id='uId' value='${param.uId}'/>
-			
+			<input type='hidden' name='orderNum'> 
 			<br/>
 			<br/>
 			<div id='lists'>
@@ -36,36 +36,26 @@
 					<span class='amt'>금액</span>
 					<span class='orderDate'>구매일자</span>
 					<span class='img'>도서 이미지</span>
-					<!-- <span class='paymentType'>결제방식</span>
-					<span class='rName'>수령인</span>
-					<span class='rZipcode'>우편번호</span>
-					<span class='rAddress'>주소</span>
-					<span class='rPhone'>전화번호</span> -->
 				</div>
 				
 				<div class='items'>
 					<c:set var='i' value='${page.startNo+1}'/> 
 					<c:forEach var='vo' items='${list}' varStatus='sts'>
 		                <c:set var='totAmt' value='${vo.orderEa * vo.price}'/>
-						<div class='item' onclick='mypage.viewOrderDetail(this.form)'> <!-- "${vo.orderNo}"  -->
+						<div class='item' onclick='mypage.viewOrderDetail(${sts.index})'> <!-- "${vo.orderNo}"  -->
 							<span class='no'>${i}</span> 
 							<span class='orderNo'>${vo.orderNo}</span>
 							<span class='code'>${vo.code}</span>
 							<span class='codeName'>${vo.codeName}</span>
-							<span class='price'><fmt:formatNumber>${vo.price}</fmt:formatNumber></span>
+							<span class='price'><fmt:formatNumber>${vo.price}</fmt:formatNumber>원</span>
 							<span class='orderEa'><fmt:formatNumber>${vo.orderEa}</fmt:formatNumber></span>
-							<span class='amt'><fmt:formatNumber>${totAmt}</fmt:formatNumber></span>
+							<span class='amt'><fmt:formatNumber>${totAmt}</fmt:formatNumber>원</span>
 							<span class='orderDate'>${vo.orderDate}</span>
 							<span class='img'><img src='${vo.img}' width='100px'/></span>
-							<%-- <span class='paymentType'>${vo.paymentType}</span>
-							<span class='rName'>${vo.rName}</span>
-							<span class='rZipcode'>${vo.rZipcode}</span>
-							<span class='rAddress'>${vo.rAddress}</span>
-							<span class='rPhone'>${vo.rPhone}</span> --%>
 						</div>
 						<c:set var='tot' value='${vo.orderNo}'/>
 			            <c:set var='totAmt' value='0'/>
-			            <input type='hidden' name='orderNo' value='${vo.orderNo}'/>
+			            <input type='hidden' name='orderNo' class="aaaa" value='${vo.orderNo}'/>
 					<c:set var='i' value='${i=i+1}'/>
 					</c:forEach>
 				</div>

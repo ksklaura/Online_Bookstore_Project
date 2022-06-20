@@ -27,26 +27,26 @@ public class UserMypageDao implements UserMypageInterface {
 	@Override
 	public List<UserMypageVo> selectOrder(Page page) {
 		List<UserMypageVo> list = null;
-		List<UserMypageVo> orderNoList = null;
+		//List<UserMypageVo> orderNoList = null;
 		//UserMypageVo vo = new UserMypageVo();
 		//String uId = vo.getuId();
 		
 		try {
 			int totSize = session.selectOne("mypage.tot_size", page);
 			
-			orderNoList = session.selectList("mypage.selectDistinctOrder", page);
-			int totSize2 = session.selectOne("mypage.tot_size2", page);
+			//orderNoList = session.selectList("mypage.selectDistinctOrder", page);
+			//int totSize2 = session.selectOne("mypage.tot_size2", page);
 			
 			page.setTotSize(totSize);
 			page.compute();
 			page.setStartNo(page.getStartNo()-1);
-			page.setTotSize2(totSize2);
+			//page.setTotSize2(totSize2);
 			this.page = page;
 			
 			//vo.setuId(uId);
 			
-			list = session.selectList("mypage.selectFirstOrder", orderNoList);
-			//list = session.selectList("mypage.selectOrder", page);
+			//list = session.selectList("mypage.selectFirstOrder", orderNoList);
+			list = session.selectList("mypage.selectOrder", page);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

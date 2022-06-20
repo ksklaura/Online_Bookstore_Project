@@ -15,6 +15,19 @@ let mypage = {};
 		}
 }*/
 
+// job에 따라 관리자 페이지 바로가기 버튼 유무
+
+mypage.adminCheck = function (){
+	var IdCheck = document.getElementById('uId');
+	var JobCheck = document.getElementById('job');
+	
+	if(IdCheck != null && JobCheck == 'admin'){
+		$('#btnToAdmin').css('display', "");
+	}else{
+		$('#btnToAmin').css('display', "none");
+	}	
+}
+
 // 모든 곳에 엔터치면 폼 submit하는 함수
 function enterKey(b){
 	if(window.event.keyCode == 13){
@@ -34,7 +47,7 @@ mypage.toMainPage = function(){
 
 // 홈화면(index)으로
 mypage.toIndexPage = function(){
-	location.href = '../../index.jsp';
+	location.href = '../../index_main.jsp';
 }
 
 
@@ -208,10 +221,11 @@ mypage.select = function(frm){
 }
 
 // 주문내역 상세보기 페이지로 이동
-mypage.viewOrderDetail = function(orderNo){ /*orderNo*/
+mypage.viewOrderDetail = function(index){ /*orderNo*/
 	let frm = $('.frm_order_list')[0];
 	//let orderNo = frm.orderNo.value;
-	frm.orderNo.value = orderNo;
+	let orderNumbers = document.querySelectorAll(".aaaa");
+	frm.orderNum.value = orderNumbers[index].value;
 	frm.action = './mypage.do?job=viewOrderDetail';
 	frm.submit();
 }
