@@ -15,7 +15,7 @@ public class UserMypageVo {
 	String paymentType; 	 // 결제 방식
 	String remark;			 // 메모
 	
-	int totalAmt;			 // 최종 금액 ★★★★★
+	int totalAmt;			 // 최종 금액
 	
 	// 여기는 ITEM
 	String codeName; 		 // 구매한 도서명

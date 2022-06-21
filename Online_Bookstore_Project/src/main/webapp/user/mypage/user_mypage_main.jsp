@@ -16,8 +16,8 @@
 	<div id='mypage_main'>
 		<h1>마이페이지</h1>
 		<form name='frm_mypage_main' id='frm_mypage_main' method='post'>
-			<input type='hidden' id='job' name='job' value='user'/> <!-- ${param.job} -->
-			<input type='hidden' id='uId' name='uId' value='a001'/> <!-- ${param.uId} -->
+			<input type='text' id='job' name='job' value='a'/> <!-- ${param.job} -->
+			<input type='text' id='uId' name='uId' value='a001'/> <!-- ${param.uId} -->
 			<div class='header1'>
 				<div class='header2'>
 					<div class='userInfo'>
@@ -40,12 +40,15 @@
 				<button type='button' class='btnIcon' onclick='mypage.selectOrder(this.form)'><i class="fa-solid fa-receipt" id='icons'></i><label class='text2'>구매내역 조회하기</label></button>
 			</div>
 			<div class='button3'>
-				<button type='button' class='btnIcon' id='btnToAdmin' onclick=''><i class="fa-solid fa-screwdriver-wrench"></i><label class='text3'>관리자 페이지 바로가기</label></button>
+				<button type='button' class='btnIcon' id='btnToAdmin' onclick='mypage.toAdminPage(this.form)'><i class="fa-solid fa-screwdriver-wrench"></i><label class='text3'>관리자 페이지 바로가기</label></button>
 			</div>
 			<br/>
 			<br/>
 			<button type='button' class='btnToIndex' onclick='mypage.toIndexPage()'>HOME 바로가기</button>
 		</form>
 	</div>
+	<script>
+		mypage.init();
+	</script>
 </body>
 </html>

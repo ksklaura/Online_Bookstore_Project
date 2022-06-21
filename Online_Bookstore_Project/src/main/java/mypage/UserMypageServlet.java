@@ -44,8 +44,6 @@ public class UserMypageServlet extends HttpServlet{
 		case "selectOrder":
 			selectOrder(req, resp);
 			break;
-//		case "searchOrder":
-//			searchOrder(req, resp);
 		case "viewOrderDetail":
 			viewOrderDetail(req, resp);
 			break;
@@ -54,85 +52,33 @@ public class UserMypageServlet extends HttpServlet{
 			break;
 		case "update":
 			update(req, resp);
+			break;
+		case "toAdminPage":
+			String url="mgt/mgt_main.jsp";
+			String uId = req.getParameter("uId");
+			req.setAttribute("uId", uId);
+			rd = req.getRequestDispatcher(url);
+			rd.forward(req, resp);
+			break;
 		}
 	}
 	
 	public void selectOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 1페이지의 목록을 가져와 반환
 		String url = base + "orderList.jsp";
 		String uId = req.getParameter("uId");
-		Page page = new Page();
 		
-		// 페이지 전환
-		String temp = req.getParameter("nowPage");
-		int nowPage = 1;
-				
-		try { 
-			nowPage = Integer.parseInt(temp); 
-		}catch(Exception ex) { 
-			nowPage = 1; }
-		 
-		page.setNowPage(nowPage);
-		page.setuId(uId);
-				
-		// 검색결과 페이지 처리
-		String findStr = req.getParameter("findStr");
-		if(findStr == null) {
-			page.setFindStr("");
-		}else {
-			page.setFindStr(findStr);
-		}
-		List<UserMypageVo> list = dao.selectOrder(page);
-		page = dao.getPage();
-				
+		UserMypageDao dao = new UserMypageDao();
+		List<UserMypageVo> list = dao.selectOrder(uId);
+		
+		int listSize = list.size();
+		
+		req.setAttribute("listSize", listSize);
 		req.setAttribute("list", list);
-		req.setAttribute("page", page);
-		req.setAttribute("uId", uId);
-				
+
 		rd = req.getRequestDispatcher(url);
 		rd.forward(req, resp);
 	}
-	
 
-//	 public void searchOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { 
-//		 // 1페이지의 목록을 가져와 반환 
-//		 String url = base + "orderList.jsp"; 
-//		 String uId = req.getParameter("uId"); 
-//		 Page page = new Page();
-//	 
-//		 // 페이지 전환 
-//		 String temp = req.getParameter("nowPage"); 
-//		 int nowPage = 1;
-//		  
-//		 try { 
-//			 nowPage = Integer.parseInt(temp); 
-//		 }catch(Exception ex) { 
-//			 nowPage = 1; 
-//		 }
-//		  
-//		 page.setNowPage(nowPage); 
-//		 page.setuId(uId);
-//		  
-//		 // 검색결과 페이지 처리 
-//		 String findStr = req.getParameter("findStr"); 
-//		 if(findStr == null) { 
-//			 page.setFindStr(""); 
-//		 }else { 
-//			 page.setFindStr(findStr); 
-//		 }
-//		 
-//		 List<UserMypageVo> list = dao.searchOrder(page); 
-//		 page = dao.getPage();
-//		 
-//		 req.setAttribute("list", list); 
-//		 req.setAttribute("page", page);
-//		 req.setAttribute("uId", uId);
-//		 
-//		 rd = req.getRequestDispatcher(url); 
-//		 rd.forward(req, resp); 
-//	 }
-	
-	
 	 public void viewOrderDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { 
 		 String url = base + "orderDetail.jsp";
 		 String orderNo = req.getParameter("orderNum"); 
@@ -175,7 +121,6 @@ public class UserMypageServlet extends HttpServlet{
 	
 	public void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		UserMypageVo vo = new UserMypageVo();
-		//String address = req.getParameter("address1") + " " + req.getParameter("address2");
 		
 		vo.setuId(req.getParameter("uId"));
 		vo.setPwd(req.getParameter("pwd"));

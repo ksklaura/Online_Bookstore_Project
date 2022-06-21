@@ -5,21 +5,16 @@
 
 	<select id="tot_size" parameterType="bean.Page" resultType="Integer"> <!-- 검색어에 해당하는 자료의 건수 -->
 		select count(o.sno) from orders o 
-		where o.uId='${uId}'
+		where o.uId='${uId}' and orderNo='${_parameter}'
 	</select>
-	
-	<select id="selectDistinctOrder" parameterType="bean.Page" resultType="mypage.UserMypageVo">
-		select distinct orderNo from orders o
-		where o.uId='${uId}'
-	</select>
-	
-	<select id="selectFirstOrder" parameterType="bean.Page" resultType="mypage.UserMypageVo">
+
+	<select id="selectFirstOrder" parameterType="String" resultType="mypage.UserMypageVo">
 		select o.orderNo, o.code, i.codeName, i.price, o.orderEa, o.amt, i.img, o.orderDate, 
 			   o.paymentType, o.rName, o.rZipcode, o.rAddress, o.rPhone
 		from orders o join item i
 		on o.code = i.code
-		where o.uId='${uId}' and orderNo='${_parameter}'
-		limit 1;
+		where o.uId='${uId}'
+		order by orderDate desc
 	</select>
 
 	<select id="selectOrder" parameterType="bean.Page" resultType="mypage.UserMypageVo">
@@ -27,17 +22,17 @@
 			   o.paymentType, o.rName, o.rZipcode, o.rAddress, o.rPhone
 		from orders o join item i
 		on o.code = i.code
-		where o.uId='${uId}'<!--  and orderNo='${_parameter}' -->
+		where o.uId='${uId}'
 		order by orderDate desc
 		limit ${startNo}, ${listSize}
 	</select>
 	
-	<select id="tot_size2" parameterType="bean.Page" resultType="Integer">
-		select count(*) from orders o
+	<select id="countPerOrder" parameterType="String" resultType="Integer">
+		select count(o.sno) from orders o
    		where o.uId='${uId}' and orderNo='${_parameter}'
 	</select>
 
-	<select id="tot_size3" parameterType="bean.Page" resultType="Integer">
+	<select id="tot_size2" parameterType="bean.Page" resultType="Integer">
 		select count(o.sno) from orders o
    		where o.orderNo='${orderNo}'
 	</select>

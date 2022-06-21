@@ -3,6 +3,7 @@ package mypage;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.catalina.User;
 import org.apache.ibatis.session.SqlSession;
 
 import bean.AES;
@@ -20,44 +21,38 @@ public class UserMypageDao implements UserMypageInterface {
 	public UserMypageDao() {
 		session = MybaFactory.getFactory().openSession();
 		aes = new AES();
+		page = new Page();
 	}
-	
-	
+
 
 	@Override
-	public List<UserMypageVo> selectOrder(Page page) {
+	public List<UserMypageVo> selectOrder(String uId) {
+		List<UserMypageVo> orderNoList = new ArrayList<UserMypageVo>();
 		List<UserMypageVo> list = null;
-		//List<UserMypageVo> orderNoList = null;
-		//UserMypageVo vo = new UserMypageVo();
-		//String uId = vo.getuId();
-		
 		try {
-			int totSize = session.selectOne("mypage.tot_size", page);
+			list = session.selectList("mypage.selectFirstOrder",uId);
 			
-			//orderNoList = session.selectList("mypage.selectDistinctOrder", page);
-			//int totSize2 = session.selectOne("mypage.tot_size2", page);
-			
-			page.setTotSize(totSize);
-			page.compute();
-			page.setStartNo(page.getStartNo()-1);
-			//page.setTotSize2(totSize2);
-			this.page = page;
-			
-			//vo.setuId(uId);
-			
-			//list = session.selectList("mypage.selectFirstOrder", orderNoList);
-			list = session.selectList("mypage.selectOrder", page);
-		}catch(Exception e) {
-			e.printStackTrace();
+			if(list.size()>0) {
+				orderNoList.add(list.get(0));
+				int index = 0;
+				for(int i=0; i<list.size(); i++) {
+					if(!orderNoList.get(index).getOrderNo().equals(list.get(i).getOrderNo())) {
+						orderNoList.add(list.get(i));
+						index++;
+					}
+				}
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
 		}
-		return list;
+		return orderNoList;
 	}
-	
+
 	@Override
 	public List<UserMypageVo> selectOrderDetail(Page page) {
 		List<UserMypageVo> list = null;
 		try {
-			int totSize = session.selectOne("mypage.tot_size3", page);
+			int totSize = session.selectOne("mypage.tot_size2", page);
 			page.setTotSize(totSize);
 			page.compute();
 			page.setStartNo(page.getStartNo()-1);

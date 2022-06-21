@@ -19,7 +19,6 @@ public class Page {
 	String findStr; 	// 검색창
 	String uId;
 	String orderNo;
-	int totSize2;		// "외 n건" 출력을 위함
 	
 	public Page() {
 		compute();
@@ -124,12 +123,6 @@ public class Page {
 	}
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
-	}
-	public int getTotSize2() {
-		return totSize2;
-	}
-	public void setTotSize2(int totSize2) {
-		this.totSize2 = totSize2;
 	}
 	
 }

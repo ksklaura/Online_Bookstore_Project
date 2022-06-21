@@ -16,16 +16,15 @@ let mypage = {};
 }*/
 
 // job에 따라 관리자 페이지 바로가기 버튼 유무
-
-mypage.adminCheck = function (){
-	var IdCheck = document.getElementById('uId');
-	var JobCheck = document.getElementById('job');
+mypage.init = function (uId, job){
+	var IdCheck = document.getElementById('uId').value;
+	var JobCheck = document.getElementById('job').value;
 	
-	if(IdCheck != null && JobCheck == 'admin'){
-		$('#btnToAdmin').css('display', "");
+	if(IdCheck != "" && JobCheck == "a"){
+		$('.button3').css('display', '');
 	}else{
-		$('#btnToAmin').css('display', "none");
-	}	
+		$('.button3').css('display', 'none');
+	}
 }
 
 // 모든 곳에 엔터치면 폼 submit하는 함수
@@ -48,6 +47,12 @@ mypage.toMainPage = function(){
 // 홈화면(index)으로
 mypage.toIndexPage = function(){
 	location.href = '../../index_main.jsp';
+}
+
+// 관리자 페이지로
+mypage.toAdminPage = function(frm){
+	frm.action = '../../mypage.do?job=toAdminPage';
+	frm.submit();
 }
 
 

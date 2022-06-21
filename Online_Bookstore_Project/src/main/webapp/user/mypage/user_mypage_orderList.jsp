@@ -17,9 +17,7 @@
 <body>
 	<div id='order_list'>
 		<h2>주문내역 조회</h2>
-		<form name='frm_order_list' id='frm_order_list' class='frm_order_list' method="post" onsubmit='return false'>
-			<%-- <input type='text' name='findStr' id='findStr' value='${param.findStr}' onkeypress='if(event.keyCode == 13){mypage.select(this.form);}'/>
-			<button type='button' class='button' onclick='mypage.select(this.form)'>조회</button> --%>
+		<form name='frm_order_list' id='frm_order_list' class='frm_order_list' method="post">
 			<input type='hidden' name='nowPage' value='${param.nowPage}'/>
 			<input type='hidden' name='uId' id='uId' value='${param.uId}'/>
 			<input type='hidden' name='orderNum'> 
@@ -42,7 +40,7 @@
 					<c:set var='i' value='${page.startNo+1}'/> 
 					<c:forEach var='vo' items='${list}' varStatus='sts'>
 		                <c:set var='totAmt' value='${vo.orderEa * vo.price}'/>
-						<div class='item' onclick='mypage.viewOrderDetail(${sts.index})'> <!-- "${vo.orderNo}"  -->
+						<div class='item' onclick='mypage.viewOrderDetail(${sts.index})'>
 							<span class='no'>${i}</span> 
 							<span class='orderNo'>${vo.orderNo}</span>
 							<span class='code'>${vo.code}</span>
@@ -78,6 +76,5 @@
 		</form>
 		<button type='button' class='btnToMain' onclick='mypage.toMainPage()'>이전 페이지</button>
 	</div>
-	
 </body>
 </html>
