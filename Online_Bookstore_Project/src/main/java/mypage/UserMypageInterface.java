@@ -2,12 +2,14 @@ package mypage;
 
 import java.util.List;
 
-import bean.Page;
+import bean.PageMypage;
 
 public interface UserMypageInterface {
-	//public UserMypageVo selectOneOrder(String uId);
+	//public UserMypageVo selectOneEtc(String uId);
 	public List<UserMypageVo> selectOrder(String uId);
 	public UserMypageVo selectOneInfo(String uId);
-	public List<UserMypageVo> selectOrderDetail(Page page);
-	public boolean update(UserMypageVo vo);
+	public UserMypageVo selectOnePwd(String uId);
+	public List<UserMypageVo> selectOrderDetail(PageMypage page);
+	public boolean updateInfo(UserMypageVo vo);
+	public boolean updatePwd(UserMypageVo vo);
 }

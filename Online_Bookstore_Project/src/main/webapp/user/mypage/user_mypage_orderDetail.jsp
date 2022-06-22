@@ -1,4 +1,4 @@
-<%@page import="bean.Page"%>
+<%@page import="bean.PageMypage"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

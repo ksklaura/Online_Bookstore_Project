@@ -15,6 +15,8 @@ public class UserMypageVo {
 	String paymentType; 	 // 결제 방식
 	String remark;			 // 메모
 	
+	int etc;
+	
 	int totalAmt;			 // 최종 금액
 	
 	// 여기는 ITEM
@@ -41,7 +43,7 @@ public class UserMypageVo {
 						String rName, String rPhone, String rZipcode, String rAddress, String paymentType,
 						String codeName, int price, String img, String pwd, String uName, String birth,
 						String phone, String email, String address1, String address2, String zipCode, String gender, String date, 
-						String job, int totalAmt, String remark) {
+						String job, int totalAmt, String remark, int etc) {
 		this.orderNo = orderNo;
 		this.uId = uId;
 		this.code = code;
@@ -72,6 +74,7 @@ public class UserMypageVo {
 		this.job = job;
 		
 		this.totalAmt = totalAmt;
+		this.etc = etc;
 	}
 	
 	/* GETTERS AND SETTERS */
@@ -237,6 +240,12 @@ public class UserMypageVo {
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public int getEtc() {
+		return etc;
+	}
+	public void setEtc(int etc) {
+		this.etc = etc;
 	}
 	
 }

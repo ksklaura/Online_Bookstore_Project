@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import bean.Page;
+import bean.PageMypage;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -33,7 +33,7 @@ public class UserMypageServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Page page = null;
+		PageMypage page = null;
 		List<UserMypageVo> list = null;
 				
 		if(req.getParameter("job") != null) {
@@ -50,8 +50,13 @@ public class UserMypageServlet extends HttpServlet{
 		case "selectOneInfo":
 			selectOneInfo(req, resp);
 			break;
-		case "update":
-			update(req, resp);
+		case "updateInfo":
+			updateInfo(req, resp);
+			break;
+		case "selectOnePwd":
+			selectOnePwd(req, resp);
+		case "updatePwd":
+			updatePwd(req, resp);
 			break;
 		case "toAdminPage":
 			String url="mgt/mgt_main.jsp";
@@ -70,9 +75,9 @@ public class UserMypageServlet extends HttpServlet{
 		UserMypageDao dao = new UserMypageDao();
 		List<UserMypageVo> list = dao.selectOrder(uId);
 		
-		int listSize = list.size();
+		//int listSize = list.size();
 		
-		req.setAttribute("listSize", listSize);
+		//req.setAttribute("listSize", listSize);
 		req.setAttribute("list", list);
 
 		rd = req.getRequestDispatcher(url);
@@ -83,7 +88,7 @@ public class UserMypageServlet extends HttpServlet{
 		 String url = base + "orderDetail.jsp";
 		 String orderNo = req.getParameter("orderNum"); 
 		 
-		 Page page = new Page();
+		 PageMypage page = new PageMypage();
 			
 		// 페이지 전환
 		String temp = req.getParameter("nowPage");
@@ -119,11 +124,10 @@ public class UserMypageServlet extends HttpServlet{
 		rd.forward(req, resp);
 	}
 	
-	public void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void updateInfo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		UserMypageVo vo = new UserMypageVo();
 		
 		vo.setuId(req.getParameter("uId"));
-		vo.setPwd(req.getParameter("pwd"));
 		vo.setuName(req.getParameter("uName"));
 		vo.setBirth(req.getParameter("birth"));
 		vo.setPhone(req.getParameter("phone"));
@@ -134,11 +138,35 @@ public class UserMypageServlet extends HttpServlet{
 		vo.setGender(req.getParameter("gender"));
 		vo.setJob("");
 		
-		if(dao.update(vo)) {
+		if(dao.updateInfo(vo)) {
 			req.setAttribute("msg", "회원정보가 수정되었습니다.");
-
 		}else {
 			req.setAttribute("msg", "회원정보 수정 중 오류가 발생했습니다. 다시 시도해주시기 바랍니다.");
+		}
+		url = base + "main.jsp";
+		rd = req.getRequestDispatcher(url);
+		rd.forward(req, resp);
+	}
+	
+	public void selectOnePwd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		url = base + "pwd_update.jsp";
+		String uId = req.getParameter("uId");
+		UserMypageVo vo = dao.selectOnePwd(uId);
+		req.setAttribute("vo", vo);
+		rd = req.getRequestDispatcher(url);
+		
+		rd.forward(req, resp);
+	}
+	
+	public void updatePwd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		UserMypageVo vo = new UserMypageVo();
+		
+		vo.setPwd(req.getParameter("pwd"));
+		
+		if(dao.updatePwd(vo)) {
+			req.setAttribute("msg", "비밀번호가 변경되었습니다.");
+		}else {
+			req.setAttribute("msg", "비밀번호 변경 중 오류가 발생했습니다. 다시 시도해주시기 바랍니다.");
 		}
 		url = base + "main.jsp";
 		rd = req.getRequestDispatcher(url);

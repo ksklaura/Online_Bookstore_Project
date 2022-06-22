@@ -1,6 +1,6 @@
 package bean;
 
-public class Page {
+public class PageMypage {
 	int startNo;		// 목록의 시작 위치				// endNo - listSize + 1 (MySQL는 제로베이스이기 때문에 +1은 불필요함.)
 	int endNo;			// 목록의 끝 위치 				// listSize * nowPage
 													// if(endNo > totSize) endNo = totSize;
@@ -20,10 +20,10 @@ public class Page {
 	String uId;
 	String orderNo;
 	
-	public Page() {
+	public PageMypage() {
 		compute();
 	}
-	public Page(int totSize, int nowPage) {
+	public PageMypage(int totSize, int nowPage) {
 		this.totSize = totSize;
 		this.nowPage = nowPage;
 		compute();
@@ -40,7 +40,7 @@ public class Page {
 	}
 	
 	public static void main(String[] args) {
-		Page p = new Page();
+		PageMypage p = new PageMypage();
 		p.setTotSize(564);
 		p.setNowPage(8);
 		p.compute();

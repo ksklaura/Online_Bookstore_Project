@@ -17,7 +17,7 @@
 <body>
 	<div id='mypage_info_update'>
 		<h2>회원정보 수정</h2>
-		기본 정보 입력
+		<label class='basicInfo'>기본 정보 입력</label>
 		<hr/>
 		<form name='frm_info_update' id='frm_info_update' method='post'>
 		
@@ -27,15 +27,6 @@
 				<span>※아이디는 변경이 불가합니다.</span><br/>
 			</div>
 				
-			<div class='label_group'>
-				<label>비밀번호</label>
-				<input type='password' name='pwd' id='pwd' placeholder='8~16자 사이로 영문과 숫자를 조합'/><br/>
-				<span id="pwdValidation"></span><br/>
-				<label>비밀번호 확인</label>
-				<input type='password' name='pwdCheck' id='pwdCheck' placeholder='비밀번호를 한 번 더 입력해주세요.'/><br/> <!-- 두 비밀번호가 일치하지 않으면 alert -->
-				<span id="pwdCheckValidation"></span>
-			</div>											 
-			
 			<div class='label_group'>
 				<label>이름</label>
 				<input type='text' name='uName' id='uName' class='readonly' value='${vo.uName}' readonly/><br/>

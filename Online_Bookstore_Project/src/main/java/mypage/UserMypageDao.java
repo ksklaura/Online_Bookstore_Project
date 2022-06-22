@@ -7,7 +7,7 @@ import org.apache.catalina.User;
 import org.apache.ibatis.session.SqlSession;
 
 import bean.AES;
-import bean.Page;
+import bean.PageMypage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import mybatis.MybaFactory;
@@ -15,13 +15,13 @@ import mybatis.MybaFactory;
 public class UserMypageDao implements UserMypageInterface {
 	SqlSession session;
 	HttpSession s;
-	Page page;
+	PageMypage page;
 	AES aes;
 		
 	public UserMypageDao() {
 		session = MybaFactory.getFactory().openSession();
 		aes = new AES();
-		page = new Page();
+		page = new PageMypage();
 	}
 
 
@@ -35,11 +35,13 @@ public class UserMypageDao implements UserMypageInterface {
 			if(list.size()>0) {
 				orderNoList.add(list.get(0));
 				int index = 0;
+			
 				for(int i=0; i<list.size(); i++) {
 					if(!orderNoList.get(index).getOrderNo().equals(list.get(i).getOrderNo())) {
 						orderNoList.add(list.get(i));
 						index++;
 					}
+					orderNoList.get(index).etc++;
 				}
 			}
 		}catch(Exception ex) {
@@ -49,7 +51,7 @@ public class UserMypageDao implements UserMypageInterface {
 	}
 
 	@Override
-	public List<UserMypageVo> selectOrderDetail(Page page) {
+	public List<UserMypageVo> selectOrderDetail(PageMypage page) {
 		List<UserMypageVo> list = null;
 		try {
 			int totSize = session.selectOne("mypage.tot_size2", page);
@@ -67,7 +69,7 @@ public class UserMypageDao implements UserMypageInterface {
 
 
 //	@Override 
-//	public List<UserMypageVo> searchOrder(Page page) {
+//	public List<UserMypageVo> searchOrder(PageMypage page) {
 //		List<UserMypageVo> list = null;
 //		
 //		try { 
@@ -101,10 +103,8 @@ public class UserMypageDao implements UserMypageInterface {
 
 	// 회원정보 수정
 	@Override
-	public boolean update(UserMypageVo vo) {
+	public boolean updateInfo(UserMypageVo vo) {
 		boolean b = false;
-		String pwd = aes.enc(vo.getPwd());
-		vo.setPwd(pwd);
 		int cnt = session.update("mypage.updateInfo", vo);
 		if(cnt > 0) {
 			b = true;
@@ -114,8 +114,37 @@ public class UserMypageDao implements UserMypageInterface {
 		}
 		return b;
 	}
+	
+	// 마이페이지 메인화면에서 비밀번호 변경 클릭시 id 넘겨서 비밀번호 값 받아오기
+	@Override
+	public UserMypageVo selectOnePwd(String uId) {
+		UserMypageVo vo = null;
+		try {
+			vo = session.selectOne("mypage.selectOnePwd", uId);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return vo;
+	}
 
-	public Page getPage() {
+	// 비밀번호 변경
+	@Override
+	public boolean updatePwd(UserMypageVo vo) {
+		boolean b = false;
+		String pwd = aes.enc(vo.getPwd());
+		vo.setPwd(pwd);
+		int cnt = session.update("mypage.updatePwd", vo);
+		if(cnt > 0) {
+			b = true;
+			session.commit();
+		}else {
+			session.rollback();
+		}
+		return b;
+	}
+	
+	public PageMypage getPage() {
 		return page;
 	}
+	
 }
