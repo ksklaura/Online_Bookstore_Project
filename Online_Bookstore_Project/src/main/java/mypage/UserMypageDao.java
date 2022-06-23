@@ -121,6 +121,8 @@ public class UserMypageDao implements UserMypageInterface {
 		UserMypageVo vo = null;
 		try {
 			vo = session.selectOne("mypage.selectOnePwd", uId);
+			String pwd = aes.dec(vo.getPwd());
+			vo.setPwd(pwd);
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
@@ -131,9 +133,11 @@ public class UserMypageDao implements UserMypageInterface {
 	@Override
 	public boolean updatePwd(UserMypageVo vo) {
 		boolean b = false;
+		System.out.println("dao : " + vo.getPwd());
 		String pwd = aes.enc(vo.getPwd());
 		vo.setPwd(pwd);
 		int cnt = session.update("mypage.updatePwd", vo);
+		System.out.println("dao");
 		if(cnt > 0) {
 			b = true;
 			session.commit();

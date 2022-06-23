@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div id='order_list'>
-		<h2>주문내역 조회</h2>
+		<h2>구매내역 조회</h2>
 		<form name='frm_order_list' id='frm_order_list' class='frm_order_list' method="post">
 			<input type='hidden' name='nowPage' value='${param.nowPage}'/>
 			<input type='hidden' name='uId' id='uId' value='${param.uId}'/>

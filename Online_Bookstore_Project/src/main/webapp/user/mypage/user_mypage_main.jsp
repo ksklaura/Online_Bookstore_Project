@@ -29,7 +29,7 @@
 						<div class='infoBoard'>
 							<div class='infoBoards'>
 								<label class='infoBoardName'>이지은</label> 님, 환영합니다.<br/><!-- '${vo.uName}' -->
-								회원정보와 주문내역을 확인해보세요.
+								회원정보와 구매내역을 확인해보세요.
 							</div>
 						</div>
 					</div>

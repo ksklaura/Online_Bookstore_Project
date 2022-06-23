@@ -122,7 +122,7 @@
 	margin-left: 30px;
 	vertical-align: middle;
 }
-#mypage_main>#frm_mypage_main .text1:hover, .text2:hover, .text3:hover, text1_2:hover{
+#mypage_main>#frm_mypage_main .text1:hover, .text2:hover, .text3:hover, .text1_2:hover{
 	color: #FEB49B;
 	cursor: pointer;
 	transition : all .5s;
@@ -557,7 +557,7 @@
 }
 #mypage_pwd_update>#frm_pwd_update label{
 	display: inline-block;
-	width: 120px;
+	width: 130px;
 	font-size: 1em;
 	font-weight: 500;
 }

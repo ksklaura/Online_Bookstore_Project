@@ -3,7 +3,7 @@
  */
 
 let mypage = {};
-
+mypage.pwdChange = false;
 /*
 	// 로그인 후 마이페이지 접속 가능
 	mypage.loginFirst = function(){
@@ -77,6 +77,7 @@ if(btnToUpdate != null){
 
 
 /* ----- 회원정보 수정 페이지 ----- */
+
 
 // 마이페이지 메인화면에서 회원정보 수정 클릭시 id 넘겨서 값 받아오기
 mypage.selectOneInfo = function(frm){
@@ -192,7 +193,9 @@ function isBirth(birth) {
 	}
 }
 
+
 /* ----- 비밀번호 변경 ----- */
+
 
 // 마이페이지 메인화면에서 비밀번호 변경 클릭시 id 넘겨서 비밀번호 값 받아오기
 mypage.selectOnePwd = function(frm){
@@ -203,12 +206,13 @@ mypage.selectOnePwd = function(frm){
 // 비밀번호 변경 (변경 페이지에서 저장 버튼 누를 때)
 mypage.updatePwd = function(frm){
 	let pwd = frm.newPwd.value;
-	
+	console.log(pwd); 
 	if(!isPwd(pwd)) {
 		alert("비밀번호 확인 후 다시 입력해주세요.");
 		return;
-	} else {
+	} else if(isPwd(pwd) && mypage.pwdChange){
 		alert("회원정보가 수정되었습니다.");
+		console.log("js : "+pwd);
 		frm.action = './mypage.do?job=updatePwd';
 		frm.submit();
 	}
@@ -228,6 +232,8 @@ $("#oldPwd").on("keyup", function(pwd){
 		$("#pwdCheck").attr("readonly",false);
 		$("#newPwd").css("background-color", "#fff");
 		$("#pwdCheck").css("background-color", "#fff");
+		$("#newPwd").css("color", "#000");
+		$("#pwdCheck").css("color", "#000");
 	} else if ($("#oldPwd").val() != PwdCheck) { // != $("#realOldPwd").val())
 		$("#checkOldPwd").text("비밀번호가 일치하지 않습니다. 비밀번호를 변경하실 수 없습니다.");
 		$("#checkOldPwd").css("color", "#dd3115");
@@ -265,12 +271,17 @@ $("#newPwd").on("blur", function(){
 $("#pwdCheck").on("keyup", function(){
 	if($("#pwd").val() != $("#pwdCheck").val()){
 		$("#pwdCheckValidation").text("입력하신 비밀번호와 다릅니다. 비밀번호를 확인 후 다시 입력해주세요.");
-	} else{
+		//$("#btnUpdatePwd").attr("cursor",not-allowed);
+	} else {
 		$("#pwdCheckValidation").text("");
+		mypage.pwdChange = true;
+		//$("#btnUpdatePwd").attr("cursor",allowed);
 	}
 })
 
+
 /* ----- 주문정보 조회 ----- */
+
 
 // 마이페이지 메인화면에서 주문정보 조회 클릭시 id 넘겨서 값 받아오기
 mypage.selectOrder = function(frm){

@@ -29,10 +29,6 @@
 		limit ${startNo}, ${listSize}
 	</select>
 -->
-	<select id="countPerOrder" parameterType="String" resultType="Integer">
-		select count(o.sno) from orders o
-   		where o.uId='${uId}' and orderNo='${_parameter}'
-	</select>
 
 	<select id="tot_size2" parameterType="bean.PageMypage" resultType="Integer">
 		select count(o.sno) from orders o
