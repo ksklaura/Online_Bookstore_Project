@@ -144,15 +144,11 @@ public class UserMypageServlet extends HttpServlet{
 		}else {
 			req.setAttribute("msg", "회원정보 수정 중 오류가 발생했습니다. 다시 시도해주시기 바랍니다.");
 		}
-		url = "./" + base + "main.jsp";
-			 // "./user/mypage/user_mypage_main.jsp"
-			 // base + "main.jsp" 
-		rd = req.getRequestDispatcher(url);
-		rd.forward(req, resp);
 	}
 	
+	
 	public void selectOnePwd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		url = base + "pwd_update.jsp";
+		url = base + "pwd_update.jsp"; 
 		String uId = req.getParameter("uId");
 		UserMypageVo vo = dao.selectOnePwd(uId);
 		req.setAttribute("vo", vo);
@@ -164,17 +160,13 @@ public class UserMypageServlet extends HttpServlet{
 	public void updatePwd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		UserMypageVo vo = new UserMypageVo();
 		
+		vo.setuId(req.getParameter("uId"));
 		vo.setPwd(req.getParameter("pwdCheck"));
-		System.out.println(vo.getPwd());
 		
 		if(dao.updatePwd(vo)) {
 			req.setAttribute("msg", "비밀번호가 변경되었습니다.");
 		}else {
 			req.setAttribute("msg", "비밀번호 변경 중 오류가 발생했습니다. 다시 시도해주시기 바랍니다.");
 		}
-		url = "./" + base + "main.jsp";
-				// base + "main.jsp";
-		rd = req.getRequestDispatcher(url);
-		rd.forward(req, resp);
 	}
 }

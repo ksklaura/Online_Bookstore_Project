@@ -3,17 +3,6 @@
  */
 
 let mypage = {};
-mypage.pwdChange = false;
-/*
-	// 로그인 후 마이페이지 접속 가능
-	mypage.loginFirst = function(){
-		if(sessionID == null || sessionID == ''){
-			alert('로그인 후에 마이페이지를 확인하실 수 있습니다.');
-			window.location = 'index.jsp?inc=./member/user_member_login.jsp'; // 로그인 화면으로 이동! // 로그인 페이지 경로 재확인 필요
-		}else{
-			// 고민중..
-		}
-}*/
 
 // job에 따라 관리자 페이지 바로가기 버튼 유무
 mypage.init = function (uId, job){
@@ -102,8 +91,10 @@ mypage.updateInfo = function(frm){
 		return;
 	} else {
 		alert("회원정보가 수정되었습니다.");
-		frm.action = './mypage.do?job=updateInfo';
-		frm.submit();
+		let param = $(frm).serialize();
+		$.post("./mypage.do?job=updateInfo", param, function(){
+			location.href="./user/mypage/user_mypage_main.jsp";
+		})
 	}
 }
 
@@ -206,15 +197,15 @@ mypage.selectOnePwd = function(frm){
 // 비밀번호 변경 (변경 페이지에서 저장 버튼 누를 때)
 mypage.updatePwd = function(frm){
 	let pwd = frm.newPwd.value;
-	console.log(pwd); 
 	if(!isPwd(pwd)) {
 		alert("비밀번호 확인 후 다시 입력해주세요.");
 		return;
-	} else if(isPwd(pwd) && mypage.pwdChange){
+	} else if(isPwd(pwd)){
 		alert("회원정보가 수정되었습니다.");
-		console.log("js : "+pwd);
-		frm.action = './mypage.do?job=updatePwd';
-		frm.submit();
+		let param = $(frm).serialize();
+		$.post("./mypage.do?job=updatePwd", param, function(){
+			location.href="./user/mypage/user_mypage_main.jsp";
+		})
 	}
 }
 
@@ -269,13 +260,18 @@ $("#newPwd").on("blur", function(){
 
 // 새 비밀번호 재입력 요청
 $("#pwdCheck").on("keyup", function(){
-	if($("#pwd").val() != $("#pwdCheck").val()){
+	if($("#newPwd").val() != $("#pwdCheck").val()){
 		$("#pwdCheckValidation").text("입력하신 비밀번호와 다릅니다. 비밀번호를 확인 후 다시 입력해주세요.");
-		//$("#btnUpdatePwd").attr("cursor",not-allowed);
-	} else {
+		document.getElementById('btnUpdatePwd').disabled=true;
+		$('#btnUpdatePwd').css('cursor','not-allowed');
+	}else if($("#newPwd").val() == $("#pwdCheck").val()){
 		$("#pwdCheckValidation").text("");
-		mypage.pwdChange = true;
-		//$("#btnUpdatePwd").attr("cursor",allowed);
+		document.getElementById('btnUpdatePwd').disabled=false;
+		$('#btnUpdatePwd').css('cursor','pointer');
+	}else {
+		$("#pwdCheckValidation").text("");
+		document.getElementById('btnUpdatePwd').disabled=false;
+		$('#btnUpdatePwd').css('cursor','pointer');
 	}
 })
 

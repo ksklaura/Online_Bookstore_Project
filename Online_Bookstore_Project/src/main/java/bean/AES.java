@@ -11,7 +11,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 public class AES {
 	String iv;
 	Key keySpec;
-	final static String key = "12345678901234567890";
+	final static String key = "12345678901234567890000000";
 	
 	public AES() {
 		try {

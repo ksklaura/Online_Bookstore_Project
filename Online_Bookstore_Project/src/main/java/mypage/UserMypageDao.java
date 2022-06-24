@@ -135,9 +135,9 @@ public class UserMypageDao implements UserMypageInterface {
 		boolean b = false;
 		System.out.println("dao : " + vo.getPwd());
 		String pwd = aes.enc(vo.getPwd());
+		
 		vo.setPwd(pwd);
 		int cnt = session.update("mypage.updatePwd", vo);
-		System.out.println("dao");
 		if(cnt > 0) {
 			b = true;
 			session.commit();

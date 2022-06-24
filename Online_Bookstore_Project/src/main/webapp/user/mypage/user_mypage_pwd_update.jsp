@@ -14,8 +14,8 @@
 		<h2>비밀번호 변경</h2>
 		<hr/>
 		<form name='frm_pwd_update' id='frm_pwd_update' method='post'>
-			<input type='text' name='uId' id='uId' value='${param.uId}'/>
-			<input type='text' name='pwd' id='realOldPwd' value='${vo.pwd}'/>
+			<input type='hidden' name='uId' id='uId' value='${param.uId}'/>
+			<input type='hidden' name='pwd' id='realOldPwd' value='${vo.pwd}'/>
 				
 			<div class='label_group'>
 				<label>기존 비밀번호</label>
@@ -26,7 +26,7 @@
 				<span id="pwdValidation"></span><br/>
 				<label>새 비밀번호 확인</label>
 				<input type='password' name='pwdCheck' id='pwdCheck' class='readonly' placeholder='비밀번호를 한 번 더 입력해주세요.' readonly/><br/>
-				<span id="pwdCheckValidation"></span>
+				<span id="pwdCheckValidation"></span>			
 			</div>											 
 
 			<div class='btns'>
