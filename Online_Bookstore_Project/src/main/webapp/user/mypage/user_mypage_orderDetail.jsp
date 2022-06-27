@@ -44,7 +44,7 @@
 							<span class='price'><fmt:formatNumber>${vo.price}</fmt:formatNumber>원</span>
 							<span class='orderEa'><fmt:formatNumber>${vo.orderEa}</fmt:formatNumber></span>
 							<span class='amt'><fmt:formatNumber>${totAmt}</fmt:formatNumber>원</span>
-							<span class='img'><img src="${vo.img}" width="100px"/></span>
+							<span class='img'><img src="./mgt/itemImg/${vo.img}" width="100px"/></span>
 						</div>
 						<%-- <c:set var='tot' value='${vo.orderNo}'/> --%>
 			            <c:set var='sum' value='${vo.amt}'/>

@@ -42,7 +42,7 @@
 					<c:forEach var='vo' items='${list}' varStatus='sts'>
 		                <c:set var='totAmt' value='${vo.orderEa * vo.price}'/>
 						<div class='item' onclick='mypage.viewOrderDetail(${sts.index})'>
-							<span class='img'><img src='${vo.img}' width='100px'/></span>
+							<span class='img'><img src='./mgt/itemImg/${vo.img}' width='100px'/></span>
 							<span class='no'>${i}</span> 
 							<span class='orderNo'>${vo.orderNo}</span>
 							<span class='code'>${vo.code}</span>
@@ -51,12 +51,23 @@
 							<span class='orderEa'><fmt:formatNumber>${vo.orderEa}</fmt:formatNumber></span>
 							<span class='amt'><fmt:formatNumber>${totAmt}</fmt:formatNumber>원</span>
 							<span class='orderDate'>${vo.orderDate}</span>
+							<c:choose>
+								<c:when test='${vo.etc-1 > 0}'>
+									<span class='etc'>외 ${vo.etc-1}건</span>
+								</c:when>
+								<c:otherwise>
+									<span class='etc2'>외 0건</span>
+								</c:otherwise>
+							</c:choose>
+						
+						<%-- 	
 							<c:if test='${vo.etc-1 > 0}'>
 								<span class='etc'>외 ${vo.etc-1}건</span>
 							</c:if>
 							<c:if test='${vo.etc-1 < 0}'>
-								<span class='etc'> </span>
+								<span class='etc2'>외 00건</span>
 							</c:if>
+						--%>
 						</div>
 						<c:set var='tot' value='${vo.orderNo}'/>
 			            <c:set var='totAmt' value='0'/>
@@ -65,23 +76,7 @@
 					</c:forEach>
 				</div>
 			</div>
-<%-- 			
-			<div class='paging'>
-				<c:if test='${page.startPage>1}'>
-					<button type='button' onclick='mypage.movePage(1)'>처음</button>
-					<button type='button' onclick='mypage.movePage(${page.startPage-1})'>이전</button>
-				</c:if>
-				
-				<c:forEach var='i' begin='${page.startPage}' end='${page.endPage}'>
-					<button type='button' onclick='mypage.movePage(${i})'>${i}</button>
-				</c:forEach>
-				
-				<c:if test='${page.totPage>page.endPage}'>
-					<button type='button' onclick='mypage.movePage(${page.endPage+1})'>다음</button>
-					<button type='button' id='btnLastPage' onclick='mypage.movePage(${page.totPage})'>끝</button>
-				</c:if>
-			</div> 
---%>
+
 		</form>
 		<button type='button' class='btnToMain' onclick='mypage.toMainPage()'>이전 페이지</button>
 	</div>

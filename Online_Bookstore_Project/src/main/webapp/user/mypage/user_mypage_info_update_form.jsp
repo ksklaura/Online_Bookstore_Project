@@ -35,14 +35,16 @@
 			
 			<div class='label_group'>
 				<label>이메일주소</label>
-				<input type='text' name='email' id='email' value='${vo.email}' placeholder='예) bookend@naver.com'/><br/>
-				<span id="emailValidation"></span>
+				<input type='hidden' name='email' id='email' value='${vo.email}' placeholder='예) bookend@naver.com'/><br/>
+				<span id='emailValidation'></span>
+				<input type='hidden' name='tempEmail' id='tempEmail' value='${vo.email}'/>
 			</div>
 			
 			<div class='label_group'>	
 				<label>휴대폰번호</label>
 				<input type='text' name='phone' id='phone' value='${vo.phone}' placeholder='- 를 제외한 숫자만 입력해주세요.'/><br/>
-				<span id="phoneValidation"></span>
+				<span id='phoneValidation'></span>
+				<input type='text' name='tempPhone' id='tempPhone' value='${vo.phone}'/>
 			</div>
 			
 			<div class='label_group'>

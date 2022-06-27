@@ -153,7 +153,7 @@
 	font-size: 14px;
 	margin: auto;
 	width: 900px;
-	height: 900px;
+	--height: 900px;
 	--overflow: auto;
 	--text-align: center;
 }
@@ -168,11 +168,7 @@
 	text-align: center;
 	--width: 1200px;
 }
-#order_list>#frm_order_list>#findStr{
-	border: 1px solid #ffb2f5;
-	font-family: 나눔바른고딕 Light;
-	height: 20px;
-}
+
 #order_list>#frm_order_list .button{
 	background-color: #ffebff;
 	border: 1px solid #ffb2f5;
@@ -195,12 +191,13 @@
 	color: #fff;
 	padding: 3px 5px;
 	display: table;
-	width: 850px;
+	width: 950px;
 }
 
 #order_list .titles span{
 	display: table-cell;
 	vertical-align: middle;
+	text-align: center;
 }
 #order_list>#frm_order_list .sum{
 	padding: 5px 0px;
@@ -217,12 +214,13 @@
 	--padding-bottom: 5px;
 	padding: 4px 5px;
 	display: table;
-	width: 850px;
+	width: 950px;
 }
 
 #order_list .item span{
 	display: table-cell;
 	vertical-align: middle;
+	text-align: center;
 }
 
 #order_list .no{
@@ -232,12 +230,12 @@
 }
 
 #order_list .orderNo{width:80px;}
-#order_list .code{width:80px;}
-#order_list .codeName{width:100px; }
-#order_list .price{width:60px; }
+#order_list .code{width:100px;}
+#order_list .codeName{width:200px; }
+#order_list .price{width:70px; }
 #order_list .orderEa{width:25px; }
-#order_list .amt{width:60px;}
-#order_list .img{width:80px; }
+#order_list .amt{width:70px;}
+#order_list .img{width:100px; }
 #order_list .orderDate{width:80px; }
 #order_list .paymentType{width:60px; }
 #order_list .rName{width:50px; }
@@ -245,6 +243,7 @@
 #order_list .rAddress{width:160px; }
 #order_list .rPhone{width:70px; }
 #order_list .etc{width: 60px;}
+#order_list .etc2{width: 60px; color: transparent;}
 
 #order_list .item:hover{
 	cursor: pointer;
@@ -261,31 +260,6 @@
 	border-bottom: 2px solid #ccc;
 	margin-bottom: 8px;
 }
-
-#order_list .paging{
-	padding-top: 10px;
-	text-align: center;
-	font-family: 나눔바른고딕 Light;
-}
-
-#order_list .paging>button{
-	padding: 2px 5px;
-	font-size: 10pt;
-	background-color: #fff;
-	border: none;
-	font-family: 나눔바른고딕 Light;
-	transition : all .2s;
-}
-#order_list .paging>button:hover{
-	cursor: pointer;
-	color: #fff;
-	background-color: #ffb2f5;
-	border-radius: 100px;
-	cursor: pointer;
-	font-family: 나눔바른고딕 Light;
-	transition : all .2s;
-}
-
 #order_list .btnToMain{
 	background-color: #ffebff;
 	border: 1px solid #ffb2f5;
@@ -311,7 +285,7 @@
 	font-family: 나눔바른고딕 Light;
 	font-size: 14px;
 	margin: auto;
-	width: 650px;
+	width: 900px;
 }
 
 #order_detail h2{
@@ -322,27 +296,29 @@
 #order_detail .frm_order_detail{
 	--padding-top: 7px;
 	--text-align: center;
+	margin-left: 80px;
 }
 #order_detail>#lists{
-	text-align: left;
+	--text-align: left;
 }
 #order_detail .titles{
 	background-color: #ffb2f5;
 	color: #fff;
 	padding: 3px 0px;
 	display: table;
-	width: 650px;
+	width: 750px;
 	--text-align: left;
 }
 
 #order_detail .titles span{
 	display: table-cell;
 	vertical-align: middle;
+	text-align: center;
 }
 
 #order_detail span{
 	display: inline-block;
-	--text-align: center;
+	text-align: center;
 }
 
 #order_detail .item{
@@ -350,8 +326,8 @@
 	--padding-bottom: 5px;
 	padding: 4px 5px;
 	display: table;
-	width: 650px;
-	--text-align: left;
+	width: 750px;
+	text-align: center;
 }
 
 #order_detail .item span{
@@ -365,12 +341,12 @@
 	--text-align: center;
 }
 
-#order_detail .code{padding-right: 30px; width:60px;}
-#order_detail .codeName{width:100px;}
-#order_detail .price{width:60px;}
+#order_detail .code{width:100px;}
+#order_detail .codeName{width:200px;}
+#order_detail .price{width:70px;}
 #order_detail .orderEa{width:25px;}
-#order_detail .amt{width:60px; }
-#order_detail .img{width:80px;}
+#order_detail .amt{width:70px; }
+#order_detail .img{width:100px;}
 
 #order_detail .item:nth-child(5n){
 	--border-bottom: 1px solid #f00;
@@ -380,24 +356,10 @@
 	border-bottom: 2px solid #ccc;
 	margin-bottom: 8px;
 }
-#order_detail>#inputs{
-	margin-left: 100px;
-}
-#order_detail>#inputs label{
-	display: inline-block;
-	width: 75px;
-	padding-left: 5px;
-	text-align: right;
-	margin-bottom: 10px;
-}
-#order_detail>#inputs input{
-	margin-left: 10px;
-	margin-bottom: 10px;
-}
 #order_detail .commonInfo{
 	border: 2px solid #C72FB3;
 	border-radius: 10px;
-	width: 300px;
+	width: 350px;
 	padding: 25px 25px 15px 25px;
 	text-align: left;
 	font-size: 16px;

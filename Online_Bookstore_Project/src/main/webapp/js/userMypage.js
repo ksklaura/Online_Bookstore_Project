@@ -3,6 +3,8 @@
  */
 
 let mypage = {};
+mypage.phoneDuplication = true; // 핸드폰 번호가 중복이면 true
+mypage.emailDuplication = true; // 이메일 주소가 중복이면 true
 
 // job에 따라 관리자 페이지 바로가기 버튼 유무
 mypage.init = function (uId, job){
@@ -89,6 +91,10 @@ mypage.updateInfo = function(frm){
 	} else if(!isBirth(birth)) {
 		alert("생년월일 확인 후 다시 입력해주세요.");
 		return;
+	} else if(mypage.phoneDuplication){		// || mypage.emailDuplication
+		alert("중복된 휴대폰 번호가 존재합니다. 확인 후 다시 입력해주세요.");
+	} else if(mypage.emailDuplication){
+		alert("중복된 이메일 주소가 존재합니다. 확인 후 다시 입력해주세요.");
 	} else {
 		alert("회원정보가 수정되었습니다.");
 		let param = $(frm).serialize();
@@ -115,22 +121,67 @@ if(btnZipFind != null){
 // 재입력 요청
 $("#email").on("blur", function(){
 	let email = $(this).val();
+	let param = $("#frm_info_update").serialize();
+	let tempEmail = $("#tempEmail").val();
 	
 	if(!isEmail(email)){
-		$("#emailValidation").text("이메일을 정확하게 입력해주세요.")
-	} else{
-		$("#emailValidation").text("")
+		$("#emailValidation").text("이메일 주소를 다시 확인해주세요.")
+	} else {
+		$.ajax({
+	        url: "./mypage.do?job=emailValidation",
+	        type: "POST",
+	        cache: false,
+	        data: param, // data에 바로 serialze한 데이터를 넣음.
+	        success: function(resp){
+				console.log(resp)
+		        if(resp == tempEmail){
+					$("#emailValidation").text("");
+					mypage.emailDuplication = false;
+				}else if(resp == 'null'){
+		        	$("#emailValidation").text("사용 가능한 이메일 주소입니다.");
+		           $("#emailValidation").css("color", "#00B700")
+		           mypage.emailDuplication = false;
+		        } else {
+		           $("#emailValidation").text("중복된 이메일 주소입니다.");
+		        	$("#emailValidation").css("color", "#dd3115");
+		        	mypage.emailDuplication = true;
+	            }
+   	 		}
+      })
 	}
 })
+
 $("#phone").on("blur", function(){
 	let phone = $(this).val();
+	let param = $("#frm_info_update").serialize();
+	let tempPhone = $("#tempPhone").val();
 	
 	if(!isPhone(phone)){
 		$("#phoneValidation").text("휴대폰 번호를 다시 확인해주세요.")
-	} else{
-		$("#phoneValidation").text("")
+	} else {
+		$.ajax({
+	        url: "./mypage.do?job=phoneValidation",
+	        type: "POST",
+	        cache: false,
+	        data: param, // data에 바로 serialze한 데이터를 넣음.
+	        success: function(resp){
+		        if(resp == tempPhone){
+					$("#phoneValidation").text("");
+					mypage.phoneDuplication = false;
+				}else if(resp == 'null'){
+		        	$("#phoneValidation").text("사용 가능한 휴대폰 번호입니다.");
+		       		$("#phoneValidation").css("color", "#00B700")
+		           mypage.phoneDuplication = false;
+		        } else {
+		         	$("#phoneValidation").text("중복된 휴대폰 번호입니다.");
+		        	$("#phoneValidation").css("color", "#dd3115");
+		        	mypage.phoneDuplication = true;
+	            }
+   	 		}
+      })
 	}
 })
+
 $("#birth").on("blur", function(){
 	let birth = $(this).val();
 	
@@ -210,9 +261,52 @@ mypage.updatePwd = function(frm){
 }
 
 // 기존 비밀번호 확인
-$("#oldPwd").on("keyup", function(pwd){
+$("#oldPwd").on("blur", function(){
+	//let oldPwd = $(this).val();
+	let param = $("#frm_pwd_update").serialize();
+	let tempPwd = $("#tempPwd").val();
 	
-	var PwdCheck = document.getElementById("realOldPwd").value;
+	$.ajax({
+		url: "./mypage.do?job=pwdValidation",
+		type: "POST",
+		cache: false,
+		data: param,
+		success: function(resp){
+			console.log(resp)
+			if(resp == tempPwd){
+				$("#checkOldPwd").text("비밀번호가 일치합니다. 하단에 새 비밀번호를 입력해주세요.");
+				$("#checkOldPwd").css("color", "#00B700");
+				$("#oldPwd").css("border", "1px solid #00B700");
+				$("#oldPwd").css("box-shadow", "0 0 2px #00B700");
+				$("#newPwd").attr("readonly",false);
+				$("#pwdCheck").attr("readonly",false);
+				$("#newPwd").css("background-color", "#fff");
+				$("#pwdCheck").css("background-color", "#fff");
+				$("#newPwd").css("color", "#000");
+				$("#pwdCheck").css("color", "#000");
+			} else if(resp != tempPwd){
+				$("#checkOldPwd").text("비밀번호가 일치하지 않습니다. 비밀번호를 변경하실 수 없습니다.");
+				$("#checkOldPwd").css("color", "#dd3115");
+				$("#oldPwd").css("border", "1px solid #dd3115");
+				$("#oldPwd").css("box-shadow", "0 0 2px #dd3115");
+				$("#newPwd").attr("readonly",true);
+				$("#pwdCheck").attr("readonly",true);
+				$("#newPwd").css("background-color", "#fec156");
+				$("#newPwd").css("color", "#fff");
+				$("#pwdCheck").css("background-color", "#fec156");
+				$("#pwdCheck").css("color", "#fff");
+			} else {
+				$("#checkOldPwd").text("");
+			}
+		}
+	})
+})
+
+// 기존 비밀번호 확인 (예전 방법)
+/*
+$("#oldPwd").on("blur", function(pwd){
+	
+	var PwdCheck = document.getElementById("tempPwd").value;
 	
 	if($("#oldPwd").val() == PwdCheck) { // == $("#realOldPwd").val())
 		$("#checkOldPwd").text("비밀번호가 일치합니다. 하단에 새 비밀번호를 입력해주세요.");
@@ -240,6 +334,7 @@ $("#oldPwd").on("keyup", function(pwd){
 		$("#checkOldPwd").text("");
 	}
 })
+*/
 
 // 정규식으로 유효성 검사
 function isPwd(pwd){
@@ -258,7 +353,7 @@ $("#newPwd").on("blur", function(){
 	}
 })
 
-// 새 비밀번호 재입력 요청
+// 새 비밀번호 확인 재입력 요청
 $("#pwdCheck").on("keyup", function(){
 	if($("#newPwd").val() != $("#pwdCheck").val()){
 		$("#pwdCheckValidation").text("입력하신 비밀번호와 다릅니다. 비밀번호를 확인 후 다시 입력해주세요.");

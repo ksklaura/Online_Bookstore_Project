@@ -54,7 +54,7 @@ public class UserMypageDao implements UserMypageInterface {
 	public List<UserMypageVo> selectOrderDetail(PageMypage page) {
 		List<UserMypageVo> list = null;
 		try {
-			int totSize = session.selectOne("mypage.tot_size2", page);
+			int totSize = session.selectOne("mypage.tot_size", page);
 			page.setTotSize(totSize);
 			page.compute();
 			page.setStartNo(page.getStartNo()-1);
@@ -66,24 +66,6 @@ public class UserMypageDao implements UserMypageInterface {
 		}
 		return list;
 	}
-
-
-//	@Override 
-//	public List<UserMypageVo> searchOrder(PageMypage page) {
-//		List<UserMypageVo> list = null;
-//		
-//		try { 
-//			int totSize = session.selectOne("mypage.tot_size2", page);
-//			page.setTotSize(totSize); page.compute();
-//			page.setStartNo(page.getStartNo()-1); 
-//			this.page = page;
-//			
-//			list = session.selectList("mypage.searchOrder", page); 
-//		}catch(Exception e) {
-//			e.printStackTrace(); 
-//		} 
-//		return list; 
-//	}
 	
 	@Override
 	public UserMypageVo selectOneInfo(String uId) {
@@ -115,14 +97,36 @@ public class UserMypageDao implements UserMypageInterface {
 		return b;
 	}
 	
+	public String phoneValidation(String phone) {
+		String chkPhone = "";
+		
+		try {
+			chkPhone = session.selectOne("mypage.phone_validation", phone);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return chkPhone;
+	}
+	
+	public String emailValidation(String email) {
+		String chkEmail = "";
+		
+		try {
+			chkEmail = session.selectOne("mypage.email_validation", email);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return chkEmail;
+	}
+	
 	// 마이페이지 메인화면에서 비밀번호 변경 클릭시 id 넘겨서 비밀번호 값 받아오기
 	@Override
 	public UserMypageVo selectOnePwd(String uId) {
 		UserMypageVo vo = null;
 		try {
 			vo = session.selectOne("mypage.selectOnePwd", uId);
-			String pwd = aes.dec(vo.getPwd());
-			vo.setPwd(pwd);
+			//String pwd = aes.dec(vo.getPwd());
+			//vo.setPwd(pwd);
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
@@ -145,6 +149,11 @@ public class UserMypageDao implements UserMypageInterface {
 			session.rollback();
 		}
 		return b;
+	}
+	
+	public String pwdValidation(String pwd) {
+		String chkPwd = aes.enc(pwd);
+		return chkPwd;
 	}
 	
 	public PageMypage getPage() {

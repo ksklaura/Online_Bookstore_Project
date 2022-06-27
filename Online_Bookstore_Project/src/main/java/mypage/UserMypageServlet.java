@@ -1,6 +1,7 @@
 package mypage;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -53,11 +54,20 @@ public class UserMypageServlet extends HttpServlet{
 		case "updateInfo":
 			updateInfo(req, resp);
 			break;
+		case "phoneValidation":
+			phoneValidation(req, resp);
+			break;
+		case "emailValidation":
+			emailValidation(req, resp);
+			break;
 		case "selectOnePwd":
 			selectOnePwd(req, resp);
 			break;
 		case "updatePwd":
 			updatePwd(req, resp);
+			break;
+		case "pwdValidation":
+			pwdValidation(req, resp);
 			break;
 		case "toAdminPage":
 			String url="mgt/mgt_main.jsp";
@@ -76,9 +86,6 @@ public class UserMypageServlet extends HttpServlet{
 		UserMypageDao dao = new UserMypageDao();
 		List<UserMypageVo> list = dao.selectOrder(uId);
 		
-		//int listSize = list.size();
-		
-		//req.setAttribute("listSize", listSize);
 		req.setAttribute("list", list);
 
 		rd = req.getRequestDispatcher(url);
@@ -146,6 +153,25 @@ public class UserMypageServlet extends HttpServlet{
 		}
 	}
 	
+	public void phoneValidation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String phone = req.getParameter("phone");
+		resp.setContentType("text/plain;charset=euc-kr"); // 문자화
+		PrintWriter out = resp.getWriter();
+	
+		String chkPhone = dao.phoneValidation(phone);
+		
+		out.print(chkPhone);
+	}
+	
+	public void emailValidation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String email = req.getParameter("email");
+		resp.setContentType("text/plain;charset=euc-kr");
+		PrintWriter out = resp.getWriter();
+	
+		String chkEmail = dao.emailValidation(email);
+		
+		out.print(chkEmail);
+	}
 	
 	public void selectOnePwd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		url = base + "pwd_update.jsp"; 
@@ -168,5 +194,15 @@ public class UserMypageServlet extends HttpServlet{
 		}else {
 			req.setAttribute("msg", "비밀번호 변경 중 오류가 발생했습니다. 다시 시도해주시기 바랍니다.");
 		}
+	}
+
+	public void pwdValidation(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String pwd = req.getParameter("oldPwd");
+		resp.setContentType("text/plain;charset=euc-kr"); // 문자화
+		PrintWriter out = resp.getWriter();
+	
+		String chkPwd = dao.pwdValidation(pwd);
+		
+		out.print(chkPwd);
 	}
 }
